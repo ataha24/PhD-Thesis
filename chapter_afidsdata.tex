@@ -1,0 +1,92 @@
+\chapter{AFIDs-Data: MRI datasets with anatomical fiducial annotations}\label{chap:afidsdata}
+\newpage
+\sloppy
+
+\noindent This chapter is largely based on:
+\begin{itemize}[noitemsep,topsep=0pt]
+	\item Taha, G. Gilmore, M. Abbass, et al. Magnetic resonance imaging datasets with anatom-
+ical fiducials for quality control and registration. Scientific Data, 10:449, 2023.
+\end{itemize}
+
+\section{Background and Summary}
+Tools available for reproducible, quantitative assessment of brain correspondence have been limited. The anatomical fiducial (AFID) placement protocol was developed and validated for millimetric accuracy in image registration. This chapter presents curated AFID placements for widely-used structural MRI datasets and templates. The data includes 132 subjects across four datasets (15,232 fiducials) and 14 templates (4,288 fiducials), totaling over 300 hours of annotation. Human rater accuracy is validated to be within 1--2 mm using over 45,000 Euclidean distances. The datasets conform to the Brain Imaging Data Structure (BIDS) format.
+
+\section{Current Applications}
+\subsection{Registration Assessment}
+Curated AFIDs are released for diverse datasets and templates, enabling testing and validation of registration algorithms. Example use cases include deformable template creation and error quantification using AFIDs, supporting both linear and non-linear methods.
+
+\subsection{Education}
+The AFID framework enables neuroanatomy teaching. New raters can compare their placements to the normative data using the AFIDs validator. The tool offers visual documentation, upload capabilities, and real-time feedback.
+
+\subsection{Brain Structure and Volumetric Analyses}
+AFID placements support morphological comparisons, aiding biomarker identification in neurodegenerative diseases.
+
+\section{Prospective Applications}
+\subsection{Registration Optimization and Quality Control}
+Curated datasets allow head-to-head comparison of registration methods and can be integrated into development workflows.
+
+\subsection{Automatic and Accurate Landmark Placement}
+AFIDs serve as ground truth for machine learning models that aim to automate fiducial localization.
+
+\subsection{Surgical Targeting}
+Ultra-high field MRI (e.g., 7T) provides visibility into small structures such as the STN. AFIDs aid predictive modeling for target localization.
+
+\subsection{Brain Anatomy Abstraction and Anonymization}
+AFID-based coordinate systems allow anonymized yet anatomically relevant analyses, facilitating pooling of datasets.
+
+\section{Methods}
+\subsection{Fiducial Selection and Placement Assessments}
+The AFID protocol comprises 32 landmarks across midline and bilateral locations. Fiducials are chosen to be robust across 1.5T, 3T, and 7T MRIs.
+
+\subsection{Hardware and Software}
+Placements were done using 3DSlicer, primarily the Markups Module. Points are placed in native space and saved as \texttt{.fcsv} files.
+
+\subsection{Performing the AFID Protocol}
+Raters underwent training via live tutorials and online resources. The placements began with AC and PC points, followed by midline and lateral structures. Annotations deviating from $>$ 10 mm were excluded.
+
+\subsection{Dataset Descriptions}
+\textbf{AFIDs-HCP30}: 30 unrelated healthy subjects (3T scans), annotated by five expert raters.
+
+\textbf{AFIDs-OASIS30}: 30 subjects from OASIS-1 (age 25--91), annotated by one expert and two novices per scan.
+
+\textbf{LHSCPD}: 40 Parkinson's patients (1.5T), annotated by two experts and three novices.
+
+\textbf{SNSX}: 32 healthy controls imaged at 7T. Annotated by one expert and two novices per scan.
+
+\subsection{Template Descriptions}
+\textbf{MNI2009bAsym, Agile12v2016, MNIColin27}: Annotated by the same raters as AFIDs-OASIS30.
+
+\textbf{BigBrainSym, MNI2009bSym, PD-25}: Annotated by two expert raters.
+
+\textbf{TemplateFlow (8 templates)}: Annotated by one expert and three novices.
+
+\subsection{AFLE Calculation}
+Mean AFLE is computed as the average Euclidean distance from each rater placement to the ground truth per fiducial. Inter-rater AFLE is the average pairwise distance between raters.
+
+\section{Data Records}
+All placements (19,520 total AFIDs) and imaging data are shared in BIDS format. Data is hosted across Zenodo and OpenNeuro repositories. Raw and ground truth placements are provided as \texttt{.fcsv} files.
+
+\section{Technical Validation}
+Global mean AFLE was  mm. Placement accuracy was reproducible across datasets and raters. See for metrics.
+
+\section{Usage Notes}
+We recommend using 3DSlicer to load the shared \texttt{.fcsv} annotation files and their corresponding MRI images. Instructions for dataset access are included in the central repository: \url{https://github.com/afids/afids-data}.
+
+Text here and a reference. Also another reference cited in Chapter \ref{chap:intro}.
+
+\subsection{Some equation}
+
+Text here with an equation.
+
+\begin{equation}
+\begin{aligned}
+\underset{p_S,p_T,q,\lambda} \min & \int_\Omega p_S(x)dx \\
+\text{s.t. } & |q'(x)| \leq R(x) , \\
+\text{ } & \lambda(x) \geq 0, \\
+\text{ } & p_S(x) \leq D_S(x), \, p_T(x) \leq D_T(x), \\
+\text{ } & \operatorname{div}\left( q'(x) + \lambda(x)e(x) \right) - p_S(x) + p_T(x) = 0
+\label{eq:jingOpt}
+\end{aligned}
+\end{equation}
+where $D_S(x)$ and $D_T(x)$.
+
