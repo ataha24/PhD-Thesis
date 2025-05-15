@@ -13,6 +13,13 @@ In this introductory chapter, we begin with a historical overview of stereotacti
 \section{Stereotactic Neurosurgery}
 Stereotactic neurosurgery is a subspecialty in neurosurgery dedicated to surgically targeting brain structures for diagnostic or therapeutic purposes. The word stereotaxy is derived from the Greek words “stereos-”, for three-dimensional (3D), and “-taxy”, for arrangement first used by Horsley and Clarke in 1908 \cite{Horsley1908-om}. At the core of this approach is the accurate localization of intracranial targets within a standardized 3D space. Early stereotactic innovations enabled clinicians and researchers to consistently identify, compare, and intervene upon specific brain regions, forming the foundation of many modern neurosurgical procedures and brain mapping applications.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/ch1_Figure_stereoframe.png}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
+
 \subsection{Overview of Stereotactic Neurosurgery}
 Victor Horsley and Robert Clarke introduced the first stereotactic apparatus for experimental neurophysiology in non-human primates \cite{Horsley1908-om}. Their system employed a Cartesian coordinate frame anchored to external cranial landmarks, allowing for reproducible access to deep brain structures and marking the first formal application of spatial coordinate systems in neuroscience.
 
@@ -20,11 +27,16 @@ While Horsley and Clarke alluded to the use of the apparatus in humans, it was i
 
 A major advancement in intracranial localization came with the identification of internal anatomical landmarks. Jean Talairach observed that the anterior commissure (AC) and posterior commissure (PC) could be reliably visualized using pneumoencephalography \cite{Dandy1918-os}, an imaging technique involving the injection of air into the ventricular system, and used it as a central axis for stereotactic navigation \cite{Talalrach1957-bs}. Talairach’s early work in the 1950s introduced the concept of a proportional grid system anchored to the AC–PC line, which was later formalized in the 1988s as the co-planar stereotactic atlas developed with Pierre Tournoux \cite{Talairach1988-wk}. Although based on a single postmortem brain, the Talairach atlas provided a reproducible framework for reporting intracranial coordinates. It shifted the field away from reliance on external skull landmarks and toward internal anatomical geometry.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/ch1_Figure_templates.png}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
+
 These early innovations established the foundation for population-based brain templates that emerged with the advent of MRI (see Section~\ref{sec:MRI}). The Montreal Neurological Institute (MNI) developed average brain templates derived from multiple individuals, enabling more representative spatial normalization across subjects. An important example is the MNI305 template \cite{Collins1994-ue}, which leveraged manually defined stereotactic landmarks (i.e., AC and PC) to align MRI scans of 305 individuals, approximating the Talairach space. This marked a convergence between classical stereotactic principles and neuroimaging, allowing more representative spatial normalization between subjects. Since then, further improvements in nonlinear image registration (see Section~\ref{sec:registration}) have culminated in brain templates that preserve anatomical detail and support more accurate inter-subject alignment \cite{Fonov2009-oi}.
 
 Today, stereotactic spaces underpin a wide range of neuroimaging applications, from structural and functional mapping to large-scale meta-analyses \cite{Yarkoni2011-sr,Dockes2020-nw}. These frameworks facilitated the development of shared databases that encompass anatomical, cytoarchitectonic, and functional information \cite{Eickhoff2005-qb}. Despite advances in non-invasive neuroimaging and image registration, fundamental stereotactic principles remain central to both neurosurgical navigation and brain mapping.
-
-Figure 1 Goes here.
 
 \subsection{Deep Brain Stimulation}
 Deep brain stimulation (DBS) is a stereotactic neurosurgical procedure that involves the targeted implantation of electrodes into deep brain nuclei to modulate dysfunctional neural circuits. Since its formal introduction by Alim Benabid in the late 1980s \cite{Benabid1987-mp}, DBS has revolutionized the management of various neurological disorders by providing a reversible, adjustable, and less destructive alternative to lesion-based surgeries \cite{Limousin1990-oz,The-Deep-Brain-Stimulation-for-Parkinson-s-Disease-Study-Group2001-ss}. To date, DBS has been implanted in over 200,000 patients worldwide \cite{Schulder2023-aj}, primarily for the treatment of movement disorders such as Parkinson's disease (PD), essential tremor, dystonia, and Tourette’s syndrome, as well as for select psychiatric conditions including obsessive-compulsive disorder and treatment-resistant depression \cite{Lozano2019-dv}.
@@ -33,11 +45,9 @@ The subthalamic nucleus (STN) is the most commonly targeted structure in DBS for
 
 Despite widespread clinical use, the therapeutic mechanisms of DBS remain poorly understood. Initial theories proposed a “functional lesion” effect, where high-frequency stimulation inhibits overactive neurons locally \cite{Benabid1987-mp, Benabid1996-jd}. DBS can also be viewed as a network-level modulator, capable of reshaping oscillatory activity and restoring information flow across distributed brain networks \cite{Miocinovic2013-rs,Herrington2016-xr}. The therapeutic effects vary by condition and symptom: tremor may improve within seconds, whereas benefits in dystonia or depression can take weeks to months, suggesting additional contributions from synaptic plasticity and long-term network reorganization \cite{Ashkan2017-hb}. These insights support an expanded view of DBS as a dynamic intervention capable of reshaping dysfunctional brain circuits over multiple timescales.
 
-Figure 2 goes here. 
-
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{figs/image (141).png}
+    \includegraphics[width=1\linewidth]{figs/ch1_Figure_whymm.png}
     \caption{Enter Caption}
     \label{fig:enter-label}
 \end{figure}
@@ -353,7 +363,8 @@ Reproducibility and transparency are foundational to modern neuroimaging researc
 
 The Brain Imaging Data Structure (BIDS) \cite{Gorgolewski2016-oh} provides a standardized format for organizing and describing neuroimaging datasets. By specifying consistent directory hierarchies, file naming conventions, and metadata formats across imaging modalities, BIDS facilitates automated analysis, data sharing, and interoperability across tools. All imaging data used in this dissertation—including structural MRI volumes and anatomical fiducial annotations—are organized in BIDS-compliant formats and released openly. To manage datasets in a reproducible and decentralized manner, we adopt \texttt{datalad} \cite{Halchenko2021-px}, a data version control system that extends Git and Git-annex for large scientific datasets. \texttt{Datalad} enables efficient tracking of changes to imaging data, annotations, and model outputs across multiple machines and collaborators.
 
-Automated processing and analysis workflows are implemented using \texttt{Snakemake} \cite{Molder2021-ig,Koster2012-ok}, a scalable and reproducible workflow engine. Workflows are written as directed acyclic graphs (DAGs) of rules, with built-in support for software containers, cluster execution, and reentrancy (i.e., ability to be gracefully interrupted and then resumed). To integrate seamlessly with BIDS datasets, we leverage \texttt{Snakebids}, a interface that automatically parses BIDS-compliant inputs into Snakemake rules with various modular functionality. 
+\subsection{Workflow Management}
+Automated processing and analysis workflows are implemented using \texttt{Snakemake} \cite{Molder2021-ig,Koster2012-ok}, a scalable and reproducible workflow engine. Workflows are written as directed acyclic graphs (DAGs) of rules, with built-in support for software containers, cluster execution, and reentrancy (i.e., ability to be gracefully interrupted and then resumed). To integrate seamlessly with BIDS datasets, we leverage \texttt{Snakebids} \cite{Van-Dyken-Tristan-Kuehn-Jason-Kai-Dahananjhay-Bansal-Ali-Khan2020-ay}, a interface that automatically parses BIDS-compliant inputs into Snakemake rules with various modular functionality. 
 
 This BIDS-complaint framework forms a robust ecosystem that supports open, scalable, and reproducible neuroimaging research. By adhering to these standards and releasing all data, code, and models, this work contributes to a broader effort toward reproducible infrastructure for stereotactic neuroimaging.
 
@@ -367,3 +378,10 @@ This dissertation introduces a coordinate-based framework inspired by classical 
 \item \textbf{\textit{Chapter 3}}: Development of a modular, open-source pipeline for automatic AFID placement using machine learning with accuracy competitive to that of human raters.
 \item \textbf{\textit{Chapter 4}}: Leverage AFID-derived coordinate geometry to predict the location of deep brain stimulation targets, such as the subthalamic nucleus, and assess model generalizability across clinical MRI datasets acquired at different field strengths.
 \end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/image (143).png}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
