@@ -25,7 +25,7 @@
 \usepackage{nameref}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage[fleqn]{amsmath}
+\usepackage{amsmath}
 \usepackage[byname]{smartref}
 \usepackage[]{amssymb}
 \usepackage[font=small]{caption}
@@ -253,7 +253,7 @@
 \newcommand{\lastname}{Taha}
 %\renewcommand{\author}[1]{\ifx\empty#1\else\gdef\@author{#1}\fi} 
 \newcommand{\authorname}{{\firstname} {\middlename} {\lastname}}
-\newcommand{\titl}{Bridging coordinates and machine learning for surgical targeting and morphometric mapping}
+\newcommand{\titl}{Bridging coordinates and machine learning for brain mapping and stereotaxy}
 \newcommand{\spinetitle}{}%only if the above is more than 60 characters
 \newcommand{\thesisformat}{Integrated Article} %or Monograph
 \newcommand{\gyear}{\number\year}
@@ -394,6 +394,7 @@ Chair of the Thesis Examination Board
 %\addcontentsline{toc}{chapter}{Acknowlegements}
 %\acknowlege{\makeacknowlege}	%as above
 \setcounter{page}{2}
+\phantomsection
 \addcontentsline{toc}{chapter}{Abstract}
 \Large\begin{center}\textbf{Abstract}\end{center}\normalsize
 \input{abstract}
@@ -404,20 +405,18 @@ Chair of the Thesis Examination Board
 
 
 \clearpage
-
+\phantomsection
 \addcontentsline{toc}{chapter}{Summary for Lay Audience}
 \Large\begin{center}\textbf{Summary for Lay Audience}\end{center}\normalsize
-%%  ***  Put your Summary for Lay Audience here.   ***
-%% (150 words for M.Sc. and 350 words for Ph.D.)
+
 \input{lay_summary}
 
 \vfill
 \newpage
 
-
+\phantomsection
 \addcontentsline{toc}{chapter}{Co-Authorship Statement}
 \Large\begin{center}\textbf{Co-Authorship Statement}\end{center}\normalsize
-%%  ***  Put your Co-authorship Statement here.   ***
 \input{coauthorship_statement}
 \vfill
 \newpage
@@ -433,14 +432,14 @@ Chair of the Thesis Examination Board
 		\raggedright{\Large\itshape%
       Alone we can do so little; together we can do so much.\par\bigskip
 		}   
-		\raggedleft\MakeUppercase{Helen Keller}\par%
+		\raggedleft\MakeUppercase{--Helen Keller}\par%
 }}
 
-\vfill\vfill
+\vfill
 
 \newpage
 
-
+\phantomsection
 \addcontentsline{toc}{chapter}{Acknowledgments}
 \Large\begin{center}\textbf{Acknowledgments}\end{center}\normalsize
 \input{acknowledgements}
@@ -450,16 +449,31 @@ Chair of the Thesis Examination Board
 
 
 \tableofcontents\newpage
+
 \newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Figures}
+\begingroup
+\sloppy
+\setlength{\cftbeforefigskip}{4pt}  % adds small space between entries
 \listoffigures
+\endgroup
+
 \newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Tables}
+\begingroup
+\sloppy
+\setlength{\cftbeforefigskip}{4pt}  % adds small space between entries
 \listoftables
+\endgroup
+
 \newpage
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Appendices}
 \listofmyappendices\newpage
 
+\phantomsection
 \addcontentsline{toc}{chapter}{List of Abbreviations, Symbols, and Nomenclature}
 \Large \textbf{List of Abbreviations, Symbols, and Nomenclature} \normalsize
 
@@ -519,6 +533,7 @@ DEF & \, & DEF \\
 \singlespacing
 
 %% This adds a line for the Bibliography in the Table of Contents.
+\phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
 %% ***   Set the bibliography style.   ***
 \bibliographystyle{apalike} % (change according to your preference)
@@ -530,8 +545,11 @@ DEF & \, & DEF \\
 %% case, you should probably put the bibliography in a separate file
 %% and \include or \input it here).
 
-
-%CV only relevant stuff... not full CV.
+\clearpage
+\pagestyle{plain}
+% CV section (add hyperlink to ToC)
+\newpage % Optional: Add a new page for the CV section
+\phantomsection % For correct hyperlinking
 \addcontentsline{toc}{chapter}{Curriculum Vitae}
 \input{curriculum_vitae}
 
