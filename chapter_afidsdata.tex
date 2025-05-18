@@ -90,12 +90,21 @@ The current version of the AFID protocol involves the placement of 32 landmarks.
 \label{tab:afid_list}
 \end{table}
 \newpage
-Fiducial localization error (FLE) is a term described by Fitzpatrick and colleagues\cite{Fitzpatrick1998-hp} that represents the distance between a fiducial position and its intended location. This term is commonly used when operating image-guidance systems during surgical procedures. In the context of the AFID protocol, and inspired by this extant terminology, we define the term \textbf{anatomical fiducial localization error (AFLE)}. This value, measured in millimeters, reflects the error arising from the placement (i.e., localization) of each fiducial. When used to communicate the accuracy of all AFIDs together, we refer to this as the \emph{global AFLE}. There are three contexts for applying AFLEs:
+Fiducial localization error (FLE) is a term described by Fitzpatrick and colleagues\cite{Fitzpatrick1998-hp} that represents the distance between a fiducial position and its intended location. This term is commonly used when operating image-guidance systems during surgical procedures. In the context of the AFID protocol, and inspired by this extant terminology, we define the term \textbf{anatomical fiducial localization error (AFLE)}. This value, measured in millimeters, reflects the error arising from the placement (i.e., localization) of each fiducial. When used to communicate the accuracy of all AFIDs together, we refer to this as the \emph{global AFLE}. There are three contexts for applying AFLEs (Figure \ref{fig:ch2_Figure_AFLE}):
 \begin{enumerate}
     \item \textbf{Mean AFLE:} Rater localization error relative to the intended location, defined as the mean placement of all raters for a specific fiducial (termed the \emph{ground truth AFID} in subsequent sections).
     \item \textbf{Inter-rater AFLE:} Rater localization error calculated as the pairwise distances between different rater placements. If a single rater performed the AFID protocol more than once, their mean placement coordinates were used for pairwise distance calculations.
     \item \textbf{Intra-rater AFLE:} Rater localization error evaluating the precision of multiple placements by a single rater, computed as the average pairwise distance between that rater’s placements.
 \end{enumerate}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/ch2_Figure_AFLE.png}
+    \caption{
+    Technical validation computations for anatomical fiducial (AFID) placements across templates and datasets. (a) and (b) display the equations used to compute mean and inter-rater anatomical fiducial localization error (AFLE), respectively. $N$ denotes the number of subjects in a dataset. For templates, $N = 1$. $R$ represents the number of raters per scan/image. In (a), Euclidean distances (shown in pink) are measured from each rater placement to the ground-truth fiducial (shown in red). The mean AFLE is computed by summing all such distances across subjects and dividing by the total number of distances per AFID ($N \times R$). In (b), Euclidean distances (pink) represent all pairwise distances between rater placements for a given scan. Inter-rater AFLE is computed by summing all pairwise distances and dividing by the total number of pairwise combinations per AFID across the dataset, given by $N \times R \times \frac{(R - 1)}{2}$.
+    }    
+\label{fig:ch2_Figure_AFLE}
+\end{figure}
 
 We also adopt the term \textbf{fiducial registration error (FRE)} in the context of the AFID protocol, and refer to it as the \textbf{anatomical fiducial registration error (AFRE)}. It is important to note that AFRE in our context diverges from the original usage by Fitzpatrick and colleagues\cite{Fitzpatrick1998-hp}, which was restricted to describing registration error at fiducials used to drive image registration (i.e., during landmark-based registration). Computed in millimeters, AFRE is defined as the error arising from the registration protocol performed between two images (often, but not limited to, subject and template). AFRE is the distance, after co-registration, between each of the 32 AFIDs placed on a moving image and their counterparts placed on the fixed image (i.e., homologous points). Thus, the AFRE provides a registration error metric that is independent of the registration protocol. The average AFRE of all fiducials is termed the \emph{global AFRE}. We  establish nomenclature to differentiate use cases for AFRE:
 \begin{itemize}
@@ -136,7 +145,7 @@ MNI2009bSym & Symmetric version of MNI2009bAsym & 1.5 & 2 experts & 64 & \cite{F
 
 PD-25 & Multi-contrast MNI template of a Parkinson’s disease cohort & 3 & 2 experts & 64 & \cite{Xiao2017-zp} \\[2pt]
 
-TemplateFlow & Central repository of open-access neuroimaging templates & 3+ & 1 expert, 3 novices & 128 & \cite{Ciric2022-bo} \\[2pt]
+TemplateFlow & A centralized resource of open-access templates for neuroimaging studies (tpl-MNI152 -Lin, NLin2009cAsym, NLin2009cSym, NLin6Asym, NLin6Sym, tpl-MNI305, tpl-OASIS30ANTs, tpl-fsaverage) & 3+ & 1 expert, 3 novices & 128 & \cite{Ciric2022-bo} \\[2pt]
 
 AFIDs-HCP30 & Subset of 30 HCP healthy controls & 3 & 5 experts & 2,880 & \cite{Van_Essen2013-yi} \\[2pt]
 
@@ -172,70 +181,65 @@ UHF = Ultra-high field; PD = Parkinson’s Disease; AD = Alzheimer’s Disease.
 
 \textbf{SNSX Dataset.} This dataset includes 32 healthy participants (age: 46.2 ± 13.5 years; range: 20–70; 12 female) and 30 Parkinson's disease patients (age: 53.4 ± 13.5 years; range: 30-75; 13 female) scanned at Western University's Centre for Functional and Metabolic Mapping using a 7T Siemens Magnetom head-only scanner with an 8-channel parallel transmit / 32-receive channel coil. Detailed imaging protocols are documented elsewhere \cite{Lau2020-dh}. Ethics approval was obtained from Western HSREB (REB\# R-17–156), with written participant consent. The AFID protocol was performed three times (5,952 fiducials). Nine raters (3 experts, 6 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by one expert and two novice raters.
 
-\textbf{MNI2009bAsym, Agile12v2016, and MNIColin27 Templates.} Three public brain templates were annotated:
+\textbf{MNI2009bAsym, Agile12v2016, and MNIColin27 Templates.} Each template was annotated four times by eight raters (same cohort as AFIDs-OASIS30), using 3DSlicer v4.8.1. A total of 32 annotations (1,024 fiducials) were performed per template:
+
 \begin{itemize}
     \item \textbf{MNI2009bAsym:} A population-average template from 152 individuals (age: 18.5–43.5 years), scanned using a 1.5-T Philips Gyroscan at the Montreal Neurological Institute \cite{Fonov2009-oi}.
     \item \textbf{Agile12v2016:} A 7-T ultra-high field template from 12 healthy adults (age: 27.6 ± 4.4 years; 6 female) acquired using a 24-channel transmit-receive coil \cite{Lau2017-ea}.
     \item \textbf{MNIColin27:} A high-resolution template from one subject scanned 27 times on a Philips 1.5-T scanner \cite{Collins1994-dx}.
 \end{itemize}
 
-Each template was annotated four times by eight raters (same cohort as AFIDs-OASIS30), using 3DSlicer v4.8.1. A total of 32 annotations (1,024 fiducials) were performed per template.
 
-\textbf{BigBrainSym, MNI2009bSym, and PD-25 Templates.}
+\textbf{BigBrainSym, MNI2009bSym, and PD-25 Templates.} Each template was annotated twice by two expert raters using 3DSlicer v4.8.1. for a total of 4 annotations (128 fiducials) per template. 
+
 \begin{itemize}
     \item \textbf{BigBrainSym:} A 3D histological model created from a 65-year-old male brain sectioned at 20~$\mu$m \cite{Amunts2013-vu}. The template represents the histological BigBrain warped to MNI2009bSym space.
     \item \textbf{MNI2009bSym:} A symmetric version of the MNI2009bAsym template \cite{Fonov2009-oi}.
     \item \textbf{PD-25:} A multi-contrast 3-T MNI template generated from a Parkinson's Disease cohort \cite{Xiao2017-zp}.
 \end{itemize}
 
-Each template was annotated twice (64 fiducials/template) by two expert raters using 3DSlicer v4.8.1.
 
 \textbf{TemplateFlow Templates.} All adult human structural MRI templates available on TemplateFlow (n = 8) at the time of manuscript preparation and not previously annotated were included\cite{Ciric2022-bo}. Each template was annotated once by four raters (1 expert and 3 novices), totaling four rounds of placement (128 fiducials/template) using 3DSlicer v4.8.1.
 
 \subsection{AFLE Calculation for All Datasets and Templates}
-For each subject or template, placements of a given fiducial were averaged across raters to establish a ground truth. For subject-level datasets, this process was repeated for every individual scan (see Figure~\ref{fig:afle_subject}); for templates, placements were averaged across annotations (see Figure~\ref{fig:afle_template}).
+For each subject or template, placements of a given fiducial were averaged across raters to establish a ground truth. For templates, placements were averaged across annotations (Figure \ref{fig:ch2_Figure_GT}a). For subject-level datasets, this process was repeated for every subject (Figure \ref{fig:ch2_Figure_GT}b).
 
-To compute the mean AFLE, Euclidean distances from the ground truth fiducial location to each of the individual rater placements were averaged for each fiducial. The result is termed the subject or template mean AFLE per fiducial. This process was independently repeated for all subjects. All subject mean AFLEs were averaged to obtain a dataset mean AFLE per fiducial, as shown in Figure~\ref{fig:afle_fig4a}. Finally, the dataset mean AFLE per fiducial was averaged across all fiducials to yield the global dataset mean AFLE. 
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/ch2_Figure_3.pdf}
+    \caption{Ground truth anatomical fiducial (AFID) placement on templates and datasets. (a,b) show the process of computing the intended AFID placement on a neuroimaging template or dataset, respectively. It is the mean of the rater point cloud at each AFID, referred to as “ground truth” in the text.}
+    \label{fig:ch2_Figure_GT}
+\end{figure}
 
-In a similar fashion, global inter-rater AFLE was computed by measuring the pairwise Euclidean distance between all rater placements for each fiducial within a subject, averaging across fiducials to obtain a subject-level inter-rater AFLE, and then averaging across all subjects to produce the global dataset inter-rater AFLE (Figure~\ref{fig:afle_fig4b}).
+To compute the mean AFLE, Euclidean distances from the ground truth fiducial location to each of the individual rater placements were averaged for each fiducial. The result is termed the subject or template mean AFLE per fiducial. This process was independently repeated for all subjects. All subject mean AFLEs were averaged to obtain a dataset mean AFLE per fiducial, as shown in Figure~\ref{fig:ch2_Figure_AFLE}a. Finally, the dataset mean AFLE per fiducial was averaged across all fiducials to yield the global dataset mean AFLE. 
+
+In a similar fashion, global inter-rater AFLE was computed by measuring the pairwise Euclidean distance between all rater placements for each fiducial within a subject, averaging across fiducials to obtain a subject-level inter-rater AFLE, and then averaging across all subjects to produce the global dataset inter-rater AFLE (Figure~\ref{fig:ch2_Figure_AFLE}b).
 
 \section{Data Records}
-In total, we release the curated AFID placements and associated imaging of four datasets and fourteen openly available human brain templates—a total of 19,520 manually placed anatomical landmarks, representing more than 300 hours of human rater annotation.
 
-All datasets have been deposited at DOI-issuing repositories such as Zenodo and OpenNeuro\cite{zenodo,openneuro1,openneuro2,openneuro3}, and conform to the Brain Imaging Data Structure (BIDS) directory hierarchy (see Table~\ref{tab:licensing} for dataset-specific licensing and metadata information). Each dataset directory contains: 
-\begin{enumerate}
-    \item Licensing and metadata files,
-    \item Subject-level directories containing the imaging data, and
-    \item A \texttt{derivatives} directory housing AFID coordinate files, also organized per subject.
-\end{enumerate}
-Both the imaging and annotation data are released. However, access to some imaging data requires users to first view and accept associated Data Usage Agreements (DUAs).
+In total, we release the curated AFID placements and associated imaging of six datasets and fourteen openly available human brain templates—a total of more than 20,000 manually placed anatomical landmarks, representing more than 300 hours of human rater annotation.
 
-To facilitate access, we additionally provide a centralized “super dataset” hosted at \url{https://github.com/afids/afids-data}\cite{afidsdata}, which aggregates all released datasets and templates. This repository allows streamlined installation of the full collection of imaging and AFID annotation data described in this work.
+All datasets have been deposited at DOI-issuing repositories such as Zenodo and OpenNeuro \cite{Taha2023-lt, Lau2023-db, Lau2023-op, Abbass2023-yl}, and conform to the Brain Imaging Data Structure (BIDS) directory hierarchy. Each dataset’s main directory contains (1) files about licensing and metadata, (2) imaging data directories organized per subject, and (3) a \texttt{derivatives} directory which includes AFID coordinates also organized per subject. We release both imaging and AFID annotation data. However, since some of the imaging datasets are protected under Data Usage Agreements (DUAs), the user needs to view and accept terms under DUAs before the imaging data becomes available for download.
 
-The centralized repository includes three main directories:
-\begin{itemize}
-    \item \textbf{data:} Raw and curated coordinate files for both datasets and templates, along with the corresponding MRI scans in BIDS format,
-    \item \textbf{notebooks:} Scripts used for data curation and quality control, and
-    \item \textbf{other:} Supplementary material including rater demographics, interactive glass brain visualizations of AFID placements, and a list of all curated landmarks.
-\end{itemize}
+For ease of acquiring the data, we merge released datasets and templates in a “super” dataset (\url{https://github.com/afids/afids-data}) which serves as a centralized repository for this data descriptor and can be used to install all of the imaging and AFID annotation data we release. In brief, the centralized repository (i.e., super dataset) has three main directories: (1) \texttt{data} — raw and curated coordinate files for datasets and templates alongside the MRI scans on which coordinates have been applied in BIDS format; (2) \texttt{notebooks} — code used for data curation and quality control; and (3) \texttt{other} — rater demographics, interactive glass brain showing applied coordinates, and a list of our curated brain landmarks.
 
-Both raw and curated rater annotations are released. Raw files include a \texttt{desc-rater} tag in the BIDS filename (with session encoded if applicable). Curated mean placements are provided with the \texttt{desc-groundtruth} tag. Users may choose to utilize specific raters’ annotations or rely on the curated “ground truth” placements, which we believe best estimate the true anatomical fiducial locations.
+Raw rater annotations were also released. These files have a \texttt{rater} label under the \texttt{desc} BIDS entity with session also encoded (if applicable). Additionally, curated mean placements (have a \texttt{groundtruth} tag in the \texttt{desc} BIDS entity) are made available. We make individual rater placements available so users have the opportunity to select the subset of rater placements for their intended application. However, we believe that our “ground truth” placements provide the best estimate as to where the true AFIDs are located.
 
-AFID coordinates are provided in 3D Slicer’s Markups comma-separated values format (\texttt{*.fcsv}). Each file contains 32 rows (one per AFID) and columns specifying the landmark label and its corresponding $x$, $y$, and $z$ coordinates in native subject or template space. The corresponding MRI volumes are in compressed NIfTI-1 format (\texttt{*.nii.gz}), conforming to BIDS compatibility.
+The AFIDs coordinates are described using the Markups comma-separated values file (i.e., \texttt{*.fcsv}), which is generated after the raters save their placements on 3DSlicer. The \texttt{.fcsv} file contains coordinate data organized in rows for each of the 32 landmarks of interest, with columns describing the AFID and corresponding \texttt{x}, \texttt{y}, and \texttt{z} coordinates in native subject or template space. As for the imaging data, all dataset images used for annotations were BIDS compatible and made available in a compressed \texttt{NIfTI-1} format (i.e., \texttt{*.nii.gz}).
 
-Anatomical landmark annotations are released under the Creative Commons Attribution 4.0 International license (CC BY 4.0), documented in the \texttt{DERIVATIVE\_DATA\_USE\_AGREEMENT.txt} file at the dataset level. Imaging data are protected by DUAs outlined in the corresponding \texttt{IMAGING\_DATA\_USE\_AGREEMENT.txt} file within each dataset.
+We release our anatomical landmark annotations under the Attribution 4.0 International (CC BY 4.0) license, available in the \texttt{DERIVATIVE\_DATA\_USE\_AGREEMENT.txt} file at the level of each dataset. Meanwhile, imaging data are protected by DUAs which we make available in the \texttt{IMAGING\_DATA\_USE\_AGREEMENT.txt} file, also at the dataset level.
 
 
 \section{Technical Validation}
-As described in the Methods section, raters typically perform the AFID protocol by following the detailed documentation and training resources available online at \url{https://afids.github.io/afids-protocol}\cite{afidsprotocol}. To ensure that the placements we release are both accurate and reproducible across expert and novice raters, we computed the anatomical fiducial localization error (AFLE) metrics for all datasets and templates. These metrics confirm that placements are generally within 1–2\,mm of the computed ground truth.  Table~\ref{tab:afle_metrics} summarizes the AFLE metrics computed for each annotated dataset and template. Across all performances of the AFID protocol, the global mean AFLE was $0.99 \pm 0.32$\,mm.
+As described in the Methods section, raters typically perform the AFID protocol by following the detailed documentation and training resources available online at \url{https://afids.github.io/afids-protocol}. To ensure that the placements we release are both accurate and reproducible across expert and novice raters, we computed the AFLE metrics for all datasets and templates. These metrics confirm that placements are generally within 1–2\,mm of the computed ground truth.  Table~\ref{tab:afle_metrics} summarizes the AFLE metrics computed for each annotated dataset and template. Across all performances of the AFID protocol, the global mean AFLE was $0.99 \pm 0.32$\,mm.
 
 
 \section{Usage Notes}
-We recommend loading the shared AFID annotation files (\texttt{*.fcsv}) in 3D Slicer alongside their associated imaging data, all of which are organized in BIDS format to facilitate intuitive navigation. The local neuroimaging datasets released in this work—specifically, LHSCPD and SNSX—will continue to undergo quality control and will be expanded as additional participants are recruited. Future versions of this data descriptor may include new anatomical landmarks, provided they meet validation criteria established in prior studies\cite{afidvalidation1,afidvalidation2}.
+We recommend loading the shared AFID annotation files (\texttt{*.fcsv}) in 3D Slicer alongside their associated imaging data, all of which are organized in BIDS format to facilitate intuitive navigation. The local neuroimaging datasets released in this work—specifically, LHSCPD and SNSX—will continue to undergo quality control and will be expanded as additional participants are recruited. Future versions of this data descriptor may include new anatomical landmarks, provided they meet validation criteria established in prior studies.
 
-Access to imaging data is granted once users accept the respective Data Usage Agreements (DUAs). Instructions for gaining access are provided with each dataset\cite{zenodo,openneuro1,openneuro2,openneuro3}. For the \textbf{AFIDs-HCP} dataset, users must register for an account at the HCP portal (\url{https://db.humanconnectome.org}) and accept the DUA to receive an access key for use when cloning the repository. For the \textbf{AFIDs-OASIS} dataset, users must accept the DUA at \url{https://www.oasis-brains.org}, though no credentials are required for access. Permission to redistribute HCP and OASIS imaging data has been obtained. The locally generated \textbf{SNSX}\cite{snsx} and \textbf{LHSCPD}\cite{lhscpd} datasets are shared under a Creative Commons license, and thus no further user intervention is required for access.
+Access to imaging data is granted once users accept the respective Data Usage Agreements (DUAs). Instructions for gaining access are provided with each dataset. For the \textbf{AFIDs-HCP} dataset, users must register for an account at the HCP portal (\url{https://db.humanconnectome.org}) and accept the DUA to receive an access key for use when cloning the repository. For the \textbf{AFIDs-OASIS} dataset, users must accept the DUA at \url{https://www.oasis-brains.org}, though no credentials are required for access. Permission to redistribute HCP and OASIS imaging data has been obtained. The locally generated \textbf{SNSX} and \textbf{LHSCPD} datasets are shared under a Creative Commons license, and thus no further user intervention is required for access.
 
-All datasets used in this study can be downloaded using DataLad (\url{https://www.datalad.org/#install})\cite{datalad}, following acceptance of any required DUAs. After installing DataLad, users may retrieve the full collection with the following commands:
+All datasets used in this study can be downloaded using DataLad (\cite{Halchenko2021-px}; \url{https://www.datalad.org/#install}, following acceptance of any required DUAs. After installing DataLad, users may retrieve the full collection with the following commands:
 \begin{verbatim}
 datalad install -r https://github.com/afids/afids-data.git
 cd afids-data
@@ -247,7 +251,47 @@ Alternatively, users may choose to retrieve specific datasets or subsets by navi
 datalad get -r .
 \end{verbatim}
 
-If DUA acceptance is required, the system will prompt users to enter relevant credentials before download. Additional information on accessing specific datasets and resolving download issues is available at our centralized repository\cite{afidsdata}. Although individual dataset repositories remain accessible, we strongly encourage users to download and work with the centralized dataset for consistency and ease of use.
+If DUA acceptance is required, the system will prompt users to enter relevant credentials before download. Additional information on accessing specific datasets and resolving download issues is available at our centralized repository. Although individual dataset repositories remain accessible, we strongly encourage users to download and work with the centralized dataset for consistency and ease of use.
+
+The code used for technical validation as well as prior AFID studies can be found on the GitHub repository page \url{https://github.com/afids}, including the validator tool \url{https://github.com/afids/afids-validator}.
+
+\begin{table}[ht]
+\centering
+\caption{Summary of anatomical fiducial localization error (AFLE) metrics across templates and datasets. Values are reported as mean ± standard deviation. EDs = Euclidean distances used for each metric.}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{3.8cm}
+  >{\centering\arraybackslash}p{4cm}
+  >{\centering\arraybackslash}p{3cm}
+  >{\centering\arraybackslash}p{3cm}
+}
+\toprule
+\textbf{Template or Dataset} & \textbf{EDs utilized for AFLE metrics} & \textbf{AFLE (Mean ± SD)} & \textbf{Inter-rater AFLE (Mean ± SD)} \\
+\midrule
+MNI152NLin2009bAsym  & Mean: 1,024; Inter-rater: 896 & 0.99 ± 1.11 & 1.07 ± 0.46 \\
+MNIColin27           & –                                & 1.71 ± 2.78 & 1.36 ± 0.88 \\
+Agile12v2016         & –                                & 1.10 ± 1.59 & 1.14 ± 0.48 \\
+BigBrainSym          & Mean: 64; Inter-rater: 32         & 0.63 ± 0.50 & 1.25 ± 1.02 \\
+MNI152NLin2009bSym   & –                                & 0.55 ± 0.26 & 1.09 ± 0.52 \\
+PD-25                & –                                & 0.42 ± 0.24 & 0.83 ± 0.47 \\
+MNI152Lin            & Mean: 128; Inter-rater: 192       & 1.07 ± 0.45 & 1.74 ± 0.74 \\
+MNI152NLin2009cAsym  & –                                & 1.03 ± 0.40 & 1.67 ± 0.63 \\
+MNI152NLin2009cSym   & –                                & 1.06 ± 0.47 & 1.67 ± 0.63 \\
+MNI152NLin6Asym      & –                                & 1.16 ± 0.51 & 1.90 ± 0.86 \\
+MNI152NLin6Sym       & –                                & 1.08 ± 0.54 & 1.73 ± 0.84 \\
+MNI305               & –                                & 1.14 ± 0.41 & 1.85 ± 0.52 \\
+OASIS30ANTs          & –                                & 0.78 ± 0.33 & 1.25 ± 0.51 \\
+fsaverage            & –                                & 1.00 ± 0.44 & 1.65 ± 0.73 \\
+AFIDs-HCP30          & Mean: 2,880; Inter-rater: 2,880   & 0.66 ± 0.22 & 1.15 ± 0.70 \\
+AFIDs-OASIS30        & –                                & 0.94 ± 0.73 & 1.58 ± 1.02 \\
+LHSCPD               & Mean: 6,400; Inter-rater: 12,800  & 1.57 ± 1.16 & 2.01 ± 1.49 \\
+SNSX                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 ± 1.37 \\
+\midrule
+\textbf{Total or Average} & Mean: 19,520; Inter-rater: 25,952 & \textbf{0.99 ± 0.32} & \textbf{1.48 ± 0.34} \\
+\bottomrule
+\end{tabular}
+\label{tab:afle_metrics}
+\end{table}
 
 
 
