@@ -363,7 +363,7 @@ where $p_i$ and $g_i$ represent predicted and ground truth labels for voxel $i$,
 \begin{figure}[hbt!]
      \centering
      \includegraphics[width=1\linewidth]{figs/ch1_Figure_UNET.png}
-     \caption{Schematic of an example 3D U-Net architecture \cite{Ronneberger2015-xm,Cicek2016-dz} used for volumetric image-to-image prediction. The input consists of $64^3$ voxel 3D patches, which undergo repeated convolution operations (blue; $3{\times}3{\times}3$ kernels) and spatial downsampling via max pooling (green; $2{\times}2{\times}2$). The encoder-decoder structure enables feature extraction at multiple scales, with skip connections (orange) preserving spatial information through concatenation. The decoder path applies upconvolutions (yellow; $2{\times}2{\times}2$) to restore resolution and generate the final $64^3$ voxel 3D output.}
+     \caption{Schematic of an example 3D U-Net architecture \cite{Ronneberger2015-xm,Cicek2016-dz} used for volumetric image-to-image prediction. The input consists of $64^3$ voxel 3D patches, which undergo repeated convolution operations (blue; $3{\times}3{\times}3$ kernels) and spatial downsampling via max pooling (green; $2{\times}2{\times}2$). The encoder-decoder structure enables feature extraction at multiple scales, with skip connections (orange) preserving spatial information through concatenation. The decoder path applies upconvolutions (yellow; $2{\times}2{\times}2$) to restore resolution and generate the final $64^3$ voxel 3D output which depicts a brain ventricle segmentation as way of example.}
      \label{fig:ch1_Figure_UNET}
  \end{figure} 
  
