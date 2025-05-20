@@ -162,6 +162,7 @@ SNSX & 32 control and 30 PD scans acquired at Western University (CFMM) & 7 & 3 
 \end{tabular}
 \label{tab:afid_datasets}
 \raggedright
+
 UHF = Ultra-high field; PD = Parkinson’s Disease; AD = Alzheimer’s Disease.
 \end{sidewaystable}
 
@@ -172,14 +173,11 @@ UHF = Ultra-high field; PD = Parkinson’s Disease; AD = Alzheimer’s Disease.
 
 \textbf{AFIDs-ADNI10 Dataset.} This subset includes 10 Alzheimer's disease patients (age: 64.4 ± 12 years; range: 53–81; 4 females) from the ADNI dataset \cite{Petersen2010-rd} imaged at 3T. The AFID protocol was performed two times (640 fiducials). Two expert raters performed annotations using 3DSlicer v4.10.0.
 
-
 \textbf{LHSCPD Dataset.} This dataset consists of 50 Parkinson’s Disease patients (age: 60.2 ± 6.8 years; range: 38–70; 13 female) imaged at London Health Sciences Centre (London, ON, Canada) on a 1.5T GE Signa scanner. MRI protocol details are described in a previous study \cite{Abbass2022-lf}. Scans are heterogeneous due to clinical acquisition. Ethics approval was granted by the Western University HSREB (REB\# 109045), and patients provided written informed consent for open data release. The AFID protocol was performed five times (8,000 fiducials). Five raters (2 experts, 3 novices) annotated each scan using 3DSlicer v4.10.0. All scans were annotated by all five raters.
 
-\textbf{SNSX Dataset.} This dataset includes 32 healthy participants (age: 46.2 ± 13.5 years; range: 20–70; 12 female) and 30 Parkinson's disease patients (age: 53.4 ± 13.5 years; range: 30-75; 13 female) scanned at Western University's Centre for Functional and Metabolic Mapping using a 7T Siemens Magnetom head-only scanner with an 8-channel parallel transmit / 32-receive channel coil. Detailed imaging protocols are documented elsewhere \cite{Lau2020-dh}. Ethics approval was obtained from Western HSREB (REB\# R-17–156), with written participant consent. The AFID protocol was performed three times (5,952 fiducials). Nine raters (3 experts, 6 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by one expert and two novice raters.
+\textbf{SNSX Dataset.} This dataset includes 32 healthy participants (age: 46.2 ± 13.5 years; range: 20–70; 12 female) and 30 Parkinson's disease patients (age: 53.4 ± 13.5 years; range: 30-75; 13 female) scanned at Western University's Centre for Functional and Metabolic Mapping using a 7T Siemens Magnetom head-only scanner with an 8-channel parallel transmit / 32-receive channel coil. The detailed imaging protocol and pre-processing steps were documented in a previous study \cite{Lau2020-dh}. Ethics approval was obtained from Western HSREB (REB\# R-17–156), with written participant consent. The AFID protocol was performed three times (5,952 fiducials). Nine raters (3 experts, 6 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by one expert and two novice raters.
 
-\textbf{3T7T Dataset.} This open dataset includes 10 healthy adults (age: 32.0 ± 11 years; range: 25–41; 3 females) imaged at both 3T and 7T. Detailed imaging protocols are documented elsewhere \cite{Chen2023-cn}. The AFID protocol was performed three times on both 3T and 7T imaging (1,920 fiducials). Six raters (3 experts, 3 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by two experts and one novice raters.
-
-\textbf{SNSX Dataset.} This dataset includes 32 healthy participants (age: 46.2 ± 13.5 years; range: 20–70; 12 female) and 30 Parkinson's disease patients (age: 53.4 ± 13.5 years; range: 30-75; 13 female) scanned at Western University's Centre for Functional and Metabolic Mapping using a 7T Siemens Magnetom head-only scanner with an 8-channel parallel transmit / 32-receive channel coil. Detailed imaging protocols are documented elsewhere \cite{Lau2020-dh}. Ethics approval was obtained from Western HSREB (REB\# R-17–156), with written participant consent. The AFID protocol was performed three times (5,952 fiducials). Nine raters (3 experts, 6 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by one expert and two novice raters.
+\textbf{3T7T Dataset.} This open dataset includes paired imaging from 10 healthy adults (age: 32.0 ± 11 years; range: 25–41; 3 females). Participants underwent (1) T1w and (2) T2w MRI scans at 3T and 7T resolutions. Detailed imaging protocols are detailed in a previous data descriptor \cite{Chen2023-cn}. The AFID protocol was performed three times on both 3T and 7T imaging (1,920 fiducials). Six raters (3 experts, 3 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by two experts and one novice raters.
 
 \textbf{MNI2009bAsym, Agile12v2016, and MNIColin27 Templates.} Each template was annotated four times by eight raters (same cohort as AFIDs-OASIS30), using 3DSlicer v4.8.1. A total of 32 annotations (1,024 fiducials) were performed per template:
 
@@ -206,7 +204,7 @@ For each subject or template, placements of a given fiducial were averaged acros
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{figs/ch2_Figure_3.pdf}
+    \includegraphics[width=1\linewidth]{figs/ch2_Figure_GT.pdf}
     \caption{Ground truth anatomical fiducial (AFID) placement on templates and datasets. (a,b) show the process of computing the intended AFID placement on a neuroimaging template or dataset, respectively. It is the mean of the rater point cloud at each AFID, referred to as “ground truth” in the text.}
     \label{fig:ch2_Figure_GT}
 \end{figure}
@@ -269,7 +267,7 @@ The code used for technical validation as well as prior AFID studies can be foun
 \textbf{Template or Dataset} & \textbf{EDs utilized for AFLE metrics} & \textbf{AFLE (Mean ± SD)} & \textbf{Inter-rater AFLE (Mean ± SD)} \\
 \midrule
 MNI152NLin2009bAsym  & Mean: 1,024; Inter-rater: 896 & 0.99 ± 1.11 & 1.07 ± 0.46 \\
-MNIColin27           & –                                & 1.71 ± 2.78 & 1.36 ± 0.88 \\
+MNIColin27           & Mean: 1,024; Inter-rater: 896 & 1.71 ± 2.78 & 1.36 ± 0.88 \\
 Agile12v2016         & –                                & 1.10 ± 1.59 & 1.14 ± 0.48 \\
 BigBrainSym          & Mean: 64; Inter-rater: 32         & 0.63 ± 0.50 & 1.25 ± 1.02 \\
 MNI152NLin2009bSym   & –                                & 0.55 ± 0.26 & 1.09 ± 0.52 \\
@@ -284,8 +282,10 @@ OASIS30ANTs          & –                                & 0.78 ± 0.33 & 1.25 
 fsaverage            & –                                & 1.00 ± 0.44 & 1.65 ± 0.73 \\
 AFIDs-HCP30          & Mean: 2,880; Inter-rater: 2,880   & 0.66 ± 0.22 & 1.15 ± 0.70 \\
 AFIDs-OASIS30        & –                                & 0.94 ± 0.73 & 1.58 ± 1.02 \\
+AFIDs-ADNI10         & –                                & 0.94 ± 0.73 & 1.58 ± 1.02 \\
 LHSCPD               & Mean: 6,400; Inter-rater: 12,800  & 1.57 ± 1.16 & 2.01 ± 1.49 \\
 SNSX                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 ± 1.37 \\
+3T7T                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 ± 1.37 \\
 \midrule
 \textbf{Total or Average} & Mean: 19,520; Inter-rater: 25,952 & \textbf{0.99 ± 0.32} & \textbf{1.48 ± 0.34} \\
 \bottomrule
@@ -294,4 +294,42 @@ SNSX                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 �
 \end{table}
 
 
-
+\begin{table}[ht]
+\centering
+\caption{Summary of anatomical fiducial localization error (AFLE) metrics across templates and datasets. Values are reported as mean ± standard deviation. EDs = Euclidean distances used for each metric.}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{
+  >{\centering\arraybackslash}p{3.8cm}
+  >{\centering\arraybackslash}p{4cm}
+  >{\centering\arraybackslash}p{3cm}
+  >{\centering\arraybackslash}p{3cm}
+}
+\toprule
+\textbf{Template or Dataset} & \textbf{EDs utilized for AFLE metrics} & \textbf{AFLE (Mean ± SD)} & \textbf{Inter-rater AFLE (Mean ± SD)} \\
+\midrule
+MNI152NLin2009bAsym  & Mean: 1,024; Inter-rater: 896 & 0.99 ± 1.11 & 1.07 ± 0.46 \\
+MNIColin27           & Mean: 1,024; Inter-rater: 896 & 1.71 ± 2.78 & 1.36 ± 0.88 \\
+Agile12v2016         & Mean: 1,024; Inter-rater: 896 & 1.10 ± 1.59 & 1.14 ± 0.48 \\
+BigBrainSym          & Mean: 64; Inter-rater: 32         & 0.63 ± 0.50 & 1.25 ± 1.02 \\
+MNI152NLin2009bSym   & Mean: 64; Inter-rater: 32        & 0.55 ± 0.26 & 1.09 ± 0.52 \\
+PD-25                & Mean: 64; Inter-rater: 32        & 0.42 ± 0.24 & 0.83 ± 0.47 \\
+MNI152Lin            & Mean: 128; Inter-rater: 192       & 1.07 ± 0.45 & 1.74 ± 0.74 \\
+MNI152NLin2009cAsym  & Mean: 128; Inter-rater: 192      & 1.03 ± 0.40 & 1.67 ± 0.63 \\
+MNI152NLin2009cSym   & Mean: 128; Inter-rater: 192      & 1.06 ± 0.47 & 1.67 ± 0.63 \\
+MNI152NLin6Asym      & Mean: 128; Inter-rater: 192      & 1.16 ± 0.51 & 1.90 ± 0.86 \\
+MNI152NLin6Sym       & Mean: 128; Inter-rater: 192      & 1.08 ± 0.54 & 1.73 ± 0.84 \\
+MNI305               & Mean: 128; Inter-rater: 192      & 1.14 ± 0.41 & 1.85 ± 0.52 \\
+OASIS30ANTs          & Mean: 128; Inter-rater: 192      & 0.78 ± 0.33 & 1.25 ± 0.51 \\
+fsaverage            & Mean: 128; Inter-rater: 192      & 1.00 ± 0.44 & 1.65 ± 0.73 \\
+AFIDs-HCP30          & Mean: 2,880; Inter-rater: 2,880   & 0.66 ± 0.22 & 1.15 ± 0.70 \\
+AFIDs-OASIS30        & Mean: 2,880; Inter-rater: 2,880  & 0.94 ± 0.73 & 1.58 ± 1.02 \\
+AFIDs-ADNI10         & Mean: 2,880; Inter-rater: 2,880  & 0.94 ± 0.73 & 1.58 ± 1.02 \\
+LHSCPD               & Mean: 6,400; Inter-rater: 12,800  & 1.57 ± 1.16 & 2.01 ± 1.49 \\
+SNSX                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 ± 1.37 \\
+3T7T                 & Mean: 3,072; Inter-rater:    & 1.04 ± 0.54 &  \\
+\midrule
+\textbf{Total or Average} & Mean: 19,520; Inter-rater: 25,952 & \textbf{0.99 ± 0.32} & \textbf{1.48 ± 0.34} \\
+\bottomrule
+\end{tabular}
+\label{tab:afle_metrics}
+\end{table}
