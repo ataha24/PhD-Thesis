@@ -7,6 +7,13 @@ This chapter is largely based on:
 \end{itemize}
 
 \section{Introduction}
+
+\subsection{Stereotaxy and modern neuroimaging}
+The origins of coordinate-based brain mapping can be traced back to Horsley and Clarke \cite{Horsley1908-om}, who designed a stereotaxic apparatus using Cartesian coordinates to localize brain structures relative to cranial landmarks. Building on this foundation, Jean Talairach \cite{Schaltenbrand1977-ge, Talairach1957-eb} leveraged anatomical landmarks, such as the anterior commissure (AC) and posterior commissure (PC), for more refined brain structure localization (i.e., the proportional grid normalization). These early innovations laid the groundwork for population-based brain templates that emerged with the advent of MRI. For example, the MNI305 template \cite{Collins1994-dx} aligned 305 individual MRI scans using AC and PC, overcoming the idiosyncrasies of using a single subject brain as a template. Subsequent advances in non-linear registration further refined these templates, culminating in modern standards such as the MNI152 space \cite{Fonov2009-oi}, now widely employed for aligning anatomical data. Despite these advances, localizing small, poorly visualized structures with millimetric accuracy remains a challenge, particularly when direct anatomical visualization is limited by image resolution, contrast, or artifacts (see Section \ref{sec:SNSX} for a more detailed overview).
+
+\subsection{Millimeters Matter in DBS}
+Deep brain stimulation (DBS) is a stereotactic procedure involving the surgical implantation of electrodes in specific brain structures (see Section \ref{sec:whymm} for a more detailed overview). It is well established for the management of a wide array of movement disorders such as Parkinson's disease (PD), essential tremor, dystonia, and Tourette’s syndrome, as well as for select psychiatric conditions including obsessive-compulsive disorder and treatment-resistant depression \cite{Lozano2019-dv}. In the case of movement disorders, small deviations in electrode position during DBS result in side-effects including paresthesias, pyramidal symptoms, diplopia, and dysarthria \cite{Buhmann2017-da}. Meanwhile, sub-optimal placement of the electrode on the order of 2 millimeters (mm) can lead to reduced clinical outcomes \cite{Horn2019-by} and also put patients at risk for post-operative cognitive decline \cite{Reich2022-jf}.
+
 \subsection{Challenges in Localizing DBS Targets}
 Achieving the level of precision needed in DBS is complicated by the limitations of clinical neuroimaging. Most MRI scanners used in clinical settings operate at 1.5 or 3 T, which may not always provide the resolution required to clearly visualize small DBS targets such as the STN. Furthermore, patient motion—exacerbated in individuals with movement disorders—suboptimal MRI protocols, and geometric distortions can further degrade image quality \cite{Boutet2021-vg, Chandran2016-eg, Lau2018-fp}. Ultra-high field (UHF; $\geq$7T) MRI enables clear delineation of small brain regions, since increased magnetic field strength yields enhanced signal-to-noise ratio and tissue contrast that can be exploited to improve spatial resolution \cite{Abosch2010-jn, Duchin2012-db, Lau2017-ea, Lau2020-dh, Lenglet2012-ii}. However, UHF-MRI systems are not commonly available, limiting widespread clinical adoption \cite{Clarke2020-ky}. As a result, DBS targeting may employ indirect localization techniques that rely on predefined coordinate spaces.
 
@@ -18,8 +25,14 @@ Machine learning (ML) models for automatic localization of brain structures have
 
 
 \subsection{Coordinate-to-Coordinate Machine Learning Framework}
-In this study, we validate an ML framework to accurately localize brain structures solely from $x$, $y$, $z$ coordinates of surrounding anatomical landmarks (i.e., coordinate-to-coordinate). Our target localization approach is dependent only on validated anatomical landmarks inspired from classical stereotactic methods \cite{Lau2019-eh, Abbass2022-lf}, which are reproducible across various MRI field strengths and modalities (see Chapter \ref{chap:afidsdata}). This framework was designed with generalizability and explainability in mind, such that it can be applied to other brain targets while enabling understanding of relationships between predefined landmarks and the targeted brain region, including structures targeted in DBS (i.e., STN). Our framework integrates well within the clinical workflow, which already involves preoperative localization of landmarks (e.g., AC and PC). Central to our approach is an open-source framework, which involves the release of our coordinate data, code, and our framework in the form of a website \url{stereotaxy.afids.io}.
+In this study, we validate an ML framework to accurately localize brain structures solely from $x$, $y$, $z$ coordinates of surrounding anatomical landmarks (i.e., coordinate-to-coordinate). Our target localization approach is dependent only on validated anatomical landmarks inspired from classical stereotactic methods \cite{Lau2019-eh, Abbass2022-lf}, which are reproducible across various MRI field strengths and modalities (see Chapter \ref{chap:afidsdata}). This framework was designed with generalizability and explainability in mind, such that it can be applied to other brain targets while enabling understanding of relationships between predefined landmarks and the targeted brain region, including structures targeted in DBS (i.e., STN). Our framework integrates well within the clinical workflow, which already involves preoperative localization of landmarks (e.g., AC and PC). Central to our approach is an open-source framework, which involves the release of our coordinate data, code, and our framework in the form of a website \url{www.stereotaxy.afids.io}.
 
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/ch4_Figure_afidspred.png}
+    \caption{Overall workflow for building our machine learning model to localize the subthalamic nucleus (STN) using anatomical fiducials (AFIDs). Validated AFID coordinates were used as features to predict STN coordinates. All coordinates were anterior commissure (AC) and posterior commissure (PC) aligned. AFID and STN coordinates on the right hemisphere were mirrored to augment data. Principal component analysis (PCA) was performed on coordinate data to capture collinearity. A nested 4-fold cross validation strategy was employed to train a linear machine learning model. Model prediction was validated on various imaging modalities and compared to deformable registration for STN localization.}
+    \label{fig:ch4_Figure_afidspred}
+\end{figure}
 
 \section{Methods}
 
@@ -32,7 +45,7 @@ We leverage 202 MRI scans on which we have more than 6,500 ground truth anatomic
 
 \texttt{An openly released 3T and 7T (3T-7T) dataset} \cite{Chen2023-cn}, consisting of healthy participants (n = 10) imaged using the following sequences: 1) 3D T1w MP2RAGE and 2) 3D T2 SPACE. Participants are imaged at both 3T and 7T (i.e., test-retest).
 
-\texttt{A subset of a previously released (“afids-data”) dataset}, which aggregated brain landmark annotations (n = 110) on various populations (healthy, abnormal ventricular size, and PD). This dataset is independent of the previously mentioned datasets.
+\texttt{A subset of a previously released (afids-data) dataset}, which aggregated brain landmark annotations (n = 110) on various populations (healthy, abnormal ventricular size, and PD). This dataset is independent of the previously mentioned datasets.
 
 \begin{table}[h!]
 \centering
@@ -59,7 +72,7 @@ Template & 3 & HC (1) & Landmark Augmentation  \\
 \end{table}
 
 \subsection{Coordinate Data Annotation}
-We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (see Supplementary Figure S1) described by the protocol which (1) circumscribe the midbrain and surrounding structures (e.g., DBS targets) and (2) can be localized within 1 mm by expert and novice human raters \cite{ref}.
+We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (see Supplementary Figure S1) described by the protocol which (1) circumscribe the midbrain and surrounding structures (e.g., DBS targets) and (2) can be localized within 1 mm by expert and novice human raters.
 
 \textbf{AFID Annotations:} All annotations were performed in accordance with the AFIDs protocol via 3DSlicer 4.10. Rater placements per AFID were averaged to curate the ground-truth coordinates (x, y, and z).
 

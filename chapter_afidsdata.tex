@@ -124,40 +124,39 @@ For manual rater placements, the AFID protocol generally began with the placemen
 \caption{Summary of datasets and templates annotated with anatomical fiducials (AFIDs), including acquisition field strength, number of raters, and total number of annotations. Some datasets are primarily image templates; others include subject-level data.}
 \begin{tabular}{
   >{\centering\arraybackslash}m{3cm}
-  >{\centering\arraybackslash}m{6.5cm}
+  >{\centering\arraybackslash}m{9cm}
   >{\centering\arraybackslash}m{1.5cm}
   >{\centering\arraybackslash}m{3.5cm}
-  >{\centering\arraybackslash}m{2.2cm}
   >{\centering\arraybackslash}m{3cm}
 }
 \toprule
-\textbf{Dataset} & \textbf{Description} & \textbf{Scanner} & \textbf{Raters (N)} & \textbf{Total} & \textbf{Imaging} \\
+\textbf{Dataset} & \textbf{Description} & \textbf{Scanner} & \textbf{Raters (N)} & \textbf{Imaging} \\
 \midrule
-MNI2009bAsym & A population template (N=152) commonly used in the neuroimaging literature  & 1.5 & 8 novices & 1,024 & \cite{Fonov2009-oi} \\[2pt]
+MNI2009bAsym & A population template (N=152) commonly used in the neuroimaging literature  & 1.5 & 8 novices & \cite{Fonov2009-oi} \\[2pt]
 
-MNIColin27 & Single subject average (N=27) & 1.5 & 8 novices & 1,024 & \cite{Holmes1998-mb} \\[2pt]
+MNIColin27 & Single subject average (N=27) & 1.5 & 8 novices & \cite{Holmes1998-mb} \\[2pt]
 
-Agile12v2016 & UHF template (N = 12) created at Western University & 7 & 8 novices & 1,024 & \cite{Lau2018-fp} \\[2pt]
+Agile12v2016 & UHF template (N = 12) created at Western University & 7 & 8 novices & \cite{Lau2018-fp} \\[2pt]
 
-BigBrainSym & Ultra-high-res histological brain (BigBrain) registered to MNI2009bSym & N/A & 2 experts & 64 & \cite{Amunts2013-vu}, \cite{Xiao2019-ao} \\[2pt]
+BigBrainSym & Ultra-high-res histological brain (BigBrain) registered to MNI2009bSym & N/A & 2 experts & \cite{Amunts2013-vu}, \cite{Xiao2019-ao} \\[2pt]
 
-MNI2009bSym & Symmetric version of MNI2009bAsym & 1.5 & 2 experts & 64 & \cite{Fonov2009-oi} \\[2pt]
+MNI2009bSym & Symmetric version of MNI2009bAsym & 1.5 & 2 experts & \cite{Fonov2009-oi} \\[2pt]
 
-PD-25 & Multi-contrast MNI template of a Parkinson’s disease cohort & 3 & 2 experts & 64 & \cite{Xiao2017-zp} \\[2pt]
+PD-25 & Multi-contrast MNI template of a Parkinson’s disease cohort & 3 & 2 experts & \cite{Xiao2017-zp} \\[2pt]
 
-TemplateFlow & A centralized resource of open-access templates for neuroimaging studies (tpl-MNI152 -Lin, NLin2009cAsym, NLin2009cSym, NLin6Asym, NLin6Sym, tpl-MNI305, tpl-OASIS30ANTs, tpl-fsaverage) & 3+ & 1 expert, 3 novices & 128 & \cite{Ciric2022-bo} \\[2pt]
+TemplateFlow & A centralized resource of open-access templates for neuroimaging studies (tpl-MNI152 -Lin, NLin2009cAsym, NLin2009cSym, NLin6Asym, NLin6Sym, tpl-MNI305, tpl-OASIS30ANTs, tpl-fsaverage) & 3+ & 1 expert, 3 novices & \cite{Ciric2022-bo} \\[2pt]
 
-AFIDs-HCP30 & Subset of 30 HCP healthy controls & 3 & 5 experts & 2,880 & \cite{Van_Essen2013-yi} \\[2pt]
+AFIDs-HCP30 & Subset of 30 HCP healthy controls & 3 & 5 experts & \cite{Van_Essen2013-yi} \\[2pt]
 
-AFIDs-OASIS30 & 30 cognitively intact controls from OASIS-1 database & 3 & 1 expert, 8 novices & 2,880 & \cite{Marcus2007-zl} \\[2pt]
+AFIDs-OASIS30 & 30 cognitively intact controls from OASIS-1 database & 3 & 1 expert, 8 novices & \cite{Marcus2007-zl} \\[2pt]
 
-AFIDs-ADNI10 & 10 AD patients & 3 & 2 experts & 640 & \cite{Petersen2010-rd} \\[2pt]
+AFIDs-ADNI10 & 10 AD patients & 3 & 2 experts & \cite{Petersen2010-rd} \\[2pt]
 
-LHSCPD & 50 PD patient scans from University Hospital (Western Univ.) & 1.5 & 2 experts, 3 novices & 6,400 & \cite{Abbass2022-lf} \\[2pt]
+LHSCPD & 50 PD patient scans from University Hospital (Western Univ.) & 1.5 & 2 experts, 3 novices & \cite{Abbass2022-lf} \\[2pt]
 
-SNSX & 32 control and 30 PD scans acquired at Western University (CFMM) & 7 & 3 experts, 6 novices & 3,072 & \cite{Lau2020-dh} \\[2pt]
+SNSX & 32 control and 30 PD scans acquired at Western University (CFMM) & 7 & 3 experts, 6 novices & \cite{Lau2020-dh} \\[2pt]
 
-3T7T & 10 healthy control test-retest & 3,7 & 3 experts, 3 novices & 960 & \cite{Chen2023-cn} \\
+3T7T & 10 healthy control test-retest & 3,7 & 3 experts, 3 novices & \cite{Chen2023-cn} \\
 \bottomrule
 \end{tabular}
 \label{tab:afid_datasets}
@@ -255,80 +254,39 @@ The code used for technical validation as well as prior AFID studies can be foun
 
 \begin{table}[ht]
 \centering
-\caption{Summary of anatomical fiducial localization error (AFLE) metrics across templates and datasets. Values are reported as mean ± standard deviation. EDs = Euclidean distances used for each metric.}
+\caption{Summary of mean and inter-rater anatomical fiducial localization error (AFLE) metrics across all templates and datasets. Euclidean distances (ED) utilized shows how many distances were used in the validator process. Values are reported as mean ± standard deviation.}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{
-  >{\centering\arraybackslash}p{3.8cm}
   >{\centering\arraybackslash}p{4cm}
-  >{\centering\arraybackslash}p{3cm}
-  >{\centering\arraybackslash}p{3cm}
+  >{\centering\arraybackslash}p{6.1cm}
+  >{\centering\arraybackslash}p{2cm}
+  >{\centering\arraybackslash}p{2.5cm}
 }
 \toprule
-\textbf{Template or Dataset} & \textbf{EDs utilized for AFLE metrics} & \textbf{AFLE (Mean ± SD)} & \textbf{Inter-rater AFLE (Mean ± SD)} \\
-\midrule
-MNI152NLin2009bAsym  & Mean: 1,024; Inter-rater: 896 & 0.99 ± 1.11 & 1.07 ± 0.46 \\
-MNIColin27           & Mean: 1,024; Inter-rater: 896 & 1.71 ± 2.78 & 1.36 ± 0.88 \\
-Agile12v2016         & –                                & 1.10 ± 1.59 & 1.14 ± 0.48 \\
-BigBrainSym          & Mean: 64; Inter-rater: 32         & 0.63 ± 0.50 & 1.25 ± 1.02 \\
-MNI152NLin2009bSym   & –                                & 0.55 ± 0.26 & 1.09 ± 0.52 \\
-PD-25                & –                                & 0.42 ± 0.24 & 0.83 ± 0.47 \\
-MNI152Lin            & Mean: 128; Inter-rater: 192       & 1.07 ± 0.45 & 1.74 ± 0.74 \\
-MNI152NLin2009cAsym  & –                                & 1.03 ± 0.40 & 1.67 ± 0.63 \\
-MNI152NLin2009cSym   & –                                & 1.06 ± 0.47 & 1.67 ± 0.63 \\
-MNI152NLin6Asym      & –                                & 1.16 ± 0.51 & 1.90 ± 0.86 \\
-MNI152NLin6Sym       & –                                & 1.08 ± 0.54 & 1.73 ± 0.84 \\
-MNI305               & –                                & 1.14 ± 0.41 & 1.85 ± 0.52 \\
-OASIS30ANTs          & –                                & 0.78 ± 0.33 & 1.25 ± 0.51 \\
-fsaverage            & –                                & 1.00 ± 0.44 & 1.65 ± 0.73 \\
-AFIDs-HCP30          & Mean: 2,880; Inter-rater: 2,880   & 0.66 ± 0.22 & 1.15 ± 0.70 \\
-AFIDs-OASIS30        & –                                & 0.94 ± 0.73 & 1.58 ± 1.02 \\
-AFIDs-ADNI10         & –                                & 0.94 ± 0.73 & 1.58 ± 1.02 \\
-LHSCPD               & Mean: 6,400; Inter-rater: 12,800  & 1.57 ± 1.16 & 2.01 ± 1.49 \\
-SNSX                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 ± 1.37 \\
-3T7T                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 ± 1.37 \\
-\midrule
-\textbf{Total or Average} & Mean: 19,520; Inter-rater: 25,952 & \textbf{0.99 ± 0.32} & \textbf{1.48 ± 0.34} \\
-\bottomrule
-\end{tabular}
-\label{tab:afle_metrics}
-\end{table}
-
-
-\begin{table}[ht]
-\centering
-\caption{Summary of anatomical fiducial localization error (AFLE) metrics across templates and datasets. Values are reported as mean ± standard deviation. EDs = Euclidean distances used for each metric.}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{
-  >{\centering\arraybackslash}p{3.8cm}
-  >{\centering\arraybackslash}p{4cm}
-  >{\centering\arraybackslash}p{3cm}
-  >{\centering\arraybackslash}p{3cm}
-}
-\toprule
-\textbf{Template or Dataset} & \textbf{EDs utilized for AFLE metrics} & \textbf{AFLE (Mean ± SD)} & \textbf{Inter-rater AFLE (Mean ± SD)} \\
+\textbf{Template or Dataset} & \textbf{EDs utilized} & \textbf{Mean} & \textbf{Inter-rater} \\
 \midrule
 MNI152NLin2009bAsym  & Mean: 1,024; Inter-rater: 896 & 0.99 ± 1.11 & 1.07 ± 0.46 \\
 MNIColin27           & Mean: 1,024; Inter-rater: 896 & 1.71 ± 2.78 & 1.36 ± 0.88 \\
 Agile12v2016         & Mean: 1,024; Inter-rater: 896 & 1.10 ± 1.59 & 1.14 ± 0.48 \\
-BigBrainSym          & Mean: 64; Inter-rater: 32         & 0.63 ± 0.50 & 1.25 ± 1.02 \\
-MNI152NLin2009bSym   & Mean: 64; Inter-rater: 32        & 0.55 ± 0.26 & 1.09 ± 0.52 \\
-PD-25                & Mean: 64; Inter-rater: 32        & 0.42 ± 0.24 & 0.83 ± 0.47 \\
-MNI152Lin            & Mean: 128; Inter-rater: 192       & 1.07 ± 0.45 & 1.74 ± 0.74 \\
-MNI152NLin2009cAsym  & Mean: 128; Inter-rater: 192      & 1.03 ± 0.40 & 1.67 ± 0.63 \\
-MNI152NLin2009cSym   & Mean: 128; Inter-rater: 192      & 1.06 ± 0.47 & 1.67 ± 0.63 \\
-MNI152NLin6Asym      & Mean: 128; Inter-rater: 192      & 1.16 ± 0.51 & 1.90 ± 0.86 \\
-MNI152NLin6Sym       & Mean: 128; Inter-rater: 192      & 1.08 ± 0.54 & 1.73 ± 0.84 \\
-MNI305               & Mean: 128; Inter-rater: 192      & 1.14 ± 0.41 & 1.85 ± 0.52 \\
-OASIS30ANTs          & Mean: 128; Inter-rater: 192      & 0.78 ± 0.33 & 1.25 ± 0.51 \\
-fsaverage            & Mean: 128; Inter-rater: 192      & 1.00 ± 0.44 & 1.65 ± 0.73 \\
-AFIDs-HCP30          & Mean: 2,880; Inter-rater: 2,880   & 0.66 ± 0.22 & 1.15 ± 0.70 \\
+BigBrainSym          & Mean: 64; Inter-rater: 32     & 0.63 ± 0.50 & 1.25 ± 1.02 \\
+MNI152NLin2009bSym   & Mean: 64; Inter-rater: 32     & 0.55 ± 0.26 & 1.09 ± 0.52 \\
+PD-25                & Mean: 64; Inter-rater: 32     & 0.42 ± 0.24 & 0.83 ± 0.47 \\
+MNI152Lin            & Mean: 128; Inter-rater: 192   & 1.07 ± 0.45 & 1.74 ± 0.74 \\
+MNI152NLin2009cAsym  & Mean: 128; Inter-rater: 192   & 1.03 ± 0.40 & 1.67 ± 0.63 \\
+MNI152NLin2009cSym   & Mean: 128; Inter-rater: 192   & 1.06 ± 0.47 & 1.67 ± 0.63 \\
+MNI152NLin6Asym      & Mean: 128; Inter-rater: 192   & 1.16 ± 0.51 & 1.90 ± 0.86 \\
+MNI152NLin6Sym       & Mean: 128; Inter-rater: 192   & 1.08 ± 0.54 & 1.73 ± 0.84 \\
+MNI305               & Mean: 128; Inter-rater: 192   & 1.14 ± 0.41 & 1.85 ± 0.52 \\
+OASIS30ANTs          & Mean: 128; Inter-rater: 192   & 0.78 ± 0.33 & 1.25 ± 0.51 \\
+fsaverage            & Mean: 128; Inter-rater: 192   & 1.00 ± 0.44 & 1.65 ± 0.73 \\
+AFIDs-HCP30          & Mean: 2,880; Inter-rater: 2,880  & 0.66 ± 0.22 & 1.15 ± 0.70 \\
 AFIDs-OASIS30        & Mean: 2,880; Inter-rater: 2,880  & 0.94 ± 0.73 & 1.58 ± 1.02 \\
-AFIDs-ADNI10         & Mean: 2,880; Inter-rater: 2,880  & 0.94 ± 0.73 & 1.58 ± 1.02 \\
-LHSCPD               & Mean: 6,400; Inter-rater: 12,800  & 1.57 ± 1.16 & 2.01 ± 1.49 \\
-SNSX                 & Mean: 3,072; Inter-rater: 3,072   & 0.96 ± 0.33 & 1.64 ± 1.37 \\
-3T7T                 & Mean: 3,072; Inter-rater:    & 1.04 ± 0.54 &  \\
+AFIDs-ADNI10         & Mean: 640; Inter-rater: 320  & 0.78 ± 0.90 & 1.55 ± 1.78 \\
+LHSCPD               & Mean: 8,000; Inter-rater: 16,000 & 1.57 ± 1.16 & 2.01 ± 1.49 \\
+SNSX                 & Mean: 5,952; Inter-rater: 5,952  & 0.96 ± 0.33 & 1.64 ± 1.37 \\
+3T7T                 & Mean: 1,920; Inter-rater: 1,920  & 1.04 ± 0.83 &  1.74 ± 1.39  \\
 \midrule
-\textbf{Total or Average} & Mean: 19,520; Inter-rater: 25,952 & \textbf{0.99 ± 0.32} & \textbf{1.48 ± 0.34} \\
+\textbf{Total or Average} & \textbf{Mean: }23,872; \textbf{Inter-rater:} 32,160 & \textbf{1.14 ± 0.36} & \textbf{1.73 ± 0.34} \\
 \bottomrule
 \end{tabular}
 \label{tab:afle_metrics}
