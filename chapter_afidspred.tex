@@ -72,11 +72,11 @@ Template & 3 & HC (1) & Landmark Augmentation  \\
 \end{table}
 
 \subsection{Coordinate Data Annotation}
-We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (see Supplementary Figure S1) described by the protocol which (1) circumscribe the midbrain and surrounding structures (e.g., DBS targets) and (2) can be localized within 1 mm by expert and novice human raters.
+We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (availible on \url{www.stereotaxy.afids.io}) described by the protocol which: (1) circumscribe the midbrain and surrounding structures (e.g., DBS targets) and (2) can be localized within 1 mm by expert and novice human raters.
 
 \textbf{AFID Annotations:} All annotations were performed in accordance with the AFIDs protocol via 3DSlicer 4.10. Rater placements per AFID were averaged to curate the ground-truth coordinates (x, y, and z).
 
-\textbf{STN Annotations:} All annotations were performed via 3DSlicer 4.10 \cite{ref} using the smallest configuration of the paint brush (1 mm) and the pencil drawing tool on 7T T2w imaging. Rater segmentations per subject were selected via majority voting (>50\%) and then collapsed to a center of mass representing the STN centroid, constituting the ground truth STN centroid coordinates (x, y, z).
+\textbf{STN Annotations:} All annotations were performed via 3DSlicer 4.10 \cite{Fedorov2012-rk} using the smallest configuration of the paint brush (1 mm) and the pencil drawing tool on 7T T2w imaging. Rater segmentations per subject were selected via majority voting (\(>\)50\%) and then collapsed to a center of mass representing the STN centroid, constituting the ground truth STN centroid coordinates (x, y, z).
 
 Each scan was annotated by at least two human raters (see Supplementary Table S1 for a breakdown of rater demographic data). The ground truth coordinates were quality controlled (QC) by three raters (AT, JZ, and EC). We provide example QC files (*.html format; see Supplementary Attachment A) with accompanying code and ground truth coordinates (*.fcsv) used in this work \cite{ref}. Supplementary Attachment B provides a full 3D-visualization of the coordinates across all datasets.
 
