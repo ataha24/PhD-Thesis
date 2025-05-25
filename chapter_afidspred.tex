@@ -23,7 +23,6 @@ Existing methods for indirect localization can be grouped into two categories: (
 \subsection{Machine Learning for Automatic Brain Target Localization}
 Machine learning (ML) models for automatic localization of brain structures have gained significant interest offering a faster and more generalizable alternative to deformable registration \cite{Baniasadi2023-lm, Ren2025-zu}. However, only a limited number of studies evaluated and adapted ML frameworks to the small DBS targets while achieving generalizability on clinical quality (e.g., MRI-gad) scans \cite{Baniasadi2023-lm}. Furthermore, due to the intensive process of acquiring manual ground-truth labels, many approaches have focused on matching accuracy of well-curated parameters during deformable registration approaches (i.e., training labels generated from quality controlled deformable registration segmentation data) \cite{Baniasadi2023-lm}.
 
-
 \subsection{Coordinate-to-Coordinate Machine Learning Framework}
 In this study, we validate an ML framework to accurately localize brain structures solely from $x$, $y$, $z$ coordinates of surrounding anatomical landmarks (i.e., coordinate-to-coordinate). Our target localization approach is dependent only on validated anatomical landmarks inspired from classical stereotactic methods \cite{Lau2019-eh, Abbass2022-lf}, which are reproducible across various MRI field strengths and modalities (see Chapter \ref{chap:afidsdata}). This framework was designed with generalizability and explainability in mind, such that it can be applied to other brain targets while enabling understanding of relationships between predefined landmarks and the targeted brain region, including structures targeted in DBS (i.e., STN). Our framework integrates well within the clinical workflow, which already involves preoperative localization of landmarks (e.g., AC and PC). Central to our approach is an open-source framework, which involves the release of our coordinate data, code, and our framework in the form of a website \url{www.stereotaxy.afids.io}.
 
@@ -37,15 +36,18 @@ In this study, we validate an ML framework to accurately localize brain structur
 \section{Methods}
 
 \subsection{Participants}
-We leverage 202 MRI scans on which we have more than 6,500 ground truth anatomical landmarks applied in accordance with a validated annotation protocol \cite{Lau2019-eh} by more than 20 human raters (Table \ref{tab:afidpred_datasets}). Although this dataset has been described in previously in Chapter \ref{chap:afidsdata}, we provide below details to datasets of the dataset as it pretains to this chapter: 
+We leverage 202 MRI scans on which we have more than 6,500 ground truth anatomical landmarks applied in accordance with a validated annotation protocol \cite{Lau2019-eh} by more than 20 human raters (Table \ref{tab:afidpred_datasets}). Although this data set has been described previously in Chapter \ref{chap:afidsdata}, we provide below details on the datasets for completeness. 
 
-\texttt{The Stereotactic Neurosurgery (SNSX) dataset.} This dataset consists of 61 participants (32 healthy controls and 30 scheduled for DBS). Participants were imaged using a 7T head-only MRI scanner (Siemens Magnetom; Siemens Healthineers, Erlangen, Germany) at the Center for Functional and Metabolic Mapping (CFMM) in Western University (REB: 109045). The MRI sequences used for this study were: 1) 3D T1w MP2RAGE  and 2) 3D optimized T2w fast-spin echo (T2 SPACE).
+\texttt{The Stereotactic Neurosurgery (SNSX) dataset.} This dataset consists of 61 participants (32 healthy controls and 30 scheduled for DBS). Participants were imaged using a 7T head-only MRI scanner (Siemens Magnetom; Siemens Healthineers, Erlangen, Germany) at the Center for Functional and Metabolic Mapping (CFMM) in Western University (REB: 109045). The MRI sequences used for this study were: 1) 3D T1w MP2RAGE and 2) 3D optimized T2w fast-spin echo (T2 SPACE).
 
 \texttt{The London Health Sciences Center Parkinson’s Disease (LHSCPD) dataset.} This dataset consists of a subset (n = 10) of the same participants as in the SNSX dataset, scheduled to undergo DBS at London Health Sciences Center (LHSC; REB: R-17-156). Participants were imaged using a 1.5T MRI scanner (Signa, 1.5T, General Electric, Milwaukee, Wisconsin, USA). The MRI sequence used in this study was a 3D T1w MP2RAGE with gadolinium contrast (termed “MRI-gad” in subsequent sections).
 
 \texttt{An openly released 3T and 7T (3T-7T) dataset} \cite{Chen2023-cn}, consisting of healthy participants (n = 10) imaged using the following sequences: 1) 3D T1w MP2RAGE and 2) 3D T2 SPACE. Participants are imaged at both 3T and 7T (i.e., test-retest).
 
 \texttt{A subset of a previously released (afids-data) dataset}, which aggregated brain landmark annotations (n = 110) on various populations (healthy, abnormal ventricular size, and PD). This dataset is independent of the previously mentioned datasets.
+
+\subsection{Coordinate Data Annotation}
+We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (available on \url{www.stereotaxy.afids.io}) described by the protocol that: (1) circumscribe the midbrain and surrounding structures (e.g. DBS targets) and (2) can be localized within 1 mm.
 
 \begin{table}[h!]
 \centering
@@ -70,9 +72,6 @@ Template & 3 & HC (1) & Landmark Augmentation  \\
 }
 \label{tab:afidpred_datasets}
 \end{table}
-
-\subsection{Coordinate Data Annotation}
-We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (availible on \url{www.stereotaxy.afids.io}) described by the protocol which: (1) circumscribe the midbrain and surrounding structures (e.g., DBS targets) and (2) can be localized within 1 mm by expert and novice human raters.
 
 \textbf{AFID Annotations:} All annotations were performed in accordance with the AFIDs protocol via 3DSlicer 4.10. Rater placements per AFID were averaged to curate the ground-truth coordinates (x, y, and z).
 
