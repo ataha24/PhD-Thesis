@@ -482,24 +482,82 @@ Chair of the Thesis Examination Board
 \addcontentsline{toc}{chapter}{List of Abbreviations, Symbols, and Nomenclature}
 \Large \textbf{List of Abbreviations, Symbols, and Nomenclature} \normalsize
 
-\begin{tabular}{lcl}
+
+\begin{longtable}{lcl}
+\endfirsthead
+
+\multicolumn{3}{l}{\textbf{List of Abbreviations and Nomenclature (continued)}} \\
+\endhead
+
+\endfoot
+
+\multicolumn{3}{l}{\textbf{General Terminology}} \\
+3D & & Three-dimensional \\
+7T & & Seven Tesla \\
+AC & & Anterior commissure \\
+AC-PC & & Anterior–posterior commissure \\
+BG & & Basal ganglia \\
+CNR & & Contrast-to-noise ratio \\
+CSF & & Cerebrospinal fluid \\
+DBS & & Deep brain stimulation \\
+GM & & Gray matter \\
+IC & & Internal capsule \\
+PC & & Posterior commissure \\
+PD & & Parkinson’s disease \\
+RN & & Red nucleus \\
+ROI & & Region of interest \\
+SNR & & Signal-to-noise ratio \\
+STN & & Subthalamic nucleus \\
+VTA & & Volume of tissue activated \\
+WM & & White matter \\
+ZI & & Zona incerta \\
 \\
-\multicolumn{3}{l}{\textbf{Terminology}}\\
-CNR & & Contrast-to-noise ratio \\
-CNR & & Contrast-to-noise ratio \\
-CNR & & Contrast-to-noise ratio \\
-CNR & & Contrast-to-noise ratio \\
-SNR & \, & Signal-to-noise ratio \\
+\multicolumn{3}{l}{\textbf{Medical Imaging Terminology}} \\
+BIDS & & Brain Imaging Data Structure \\
+CT & & Computed tomography \\
+DICOM & & Digital Imaging and Communications in Medicine \\
+DTI & & Diffusion tensor imaging \\
+DWI & & Diffusion-weighted imaging \\
+FGATIR & & Fast Gray Matter Acquisition T1 Inversion Recovery \\
+FLAIR & & Fluid-attenuated inversion recovery \\
+MP2RAGE & & Magnetization-prepared 2 rapid gradient echoes \\
+MPRAGE & & Magnetization-prepared rapid acquisition gradient echo \\
+MRI & & Magnetic resonance imaging \\
+NIfTI & & Neuroimaging Informatics Technology Initiative \\
+NMR & & Nuclear magnetic resonance \\
+QSM & & Quantitative susceptibility mapping \\
+SPACE & & Sampling Perfection with Application-optimized Contrasts using flip angle Evolutions \\
+SWI & & Susceptibility-weighted imaging \\
+T1w & & T1-weighted \\
+T2w & & T2-weighted \\
+TE & & Echo time \\
+TI & & Inversion time \\
+TR & & Repetition time \\
+UHF & & Ultra-high field \\
 \\
-\multicolumn{3}{l}{\textbf{Medical Imaging Terminology}}\\
-CT & \, & Computed Tomography \\
-MRI & \, & Magnetic Resonance Imaging \\
-QSM & \, & Quantitative Susceptibility Mapping \\
+\multicolumn{3}{l}{\textbf{Machine Learning and Image Processing Terminology}} \\
+ANN & & Artificial neural network \\
+CNN & & Convolutional neural network \\
+DL & & Deep learning \\
+ED & & Euclidean distance \\
+ML & & Machine learning \\
+nnU-Net & & No-new-Unet (self-configuring U-Net) \\
+ReLU & & Rectified linear unit \\
+XGBoost & & Extreme Gradient Boosting \\
+ANTs & & Advanced Normalization Tools \\
+FLIRT & & FMRIB's Linear Image Registration Tool \\
+FNIRT & & FMRIB's Nonlinear Image Registration Tool \\
+MI & & Mutual information \\
+NCC & & Normalized cross-correlation \\
+SSD & & Sum of squared differences \\
+SyN & & Symmetric normalization \\
 \\
-\multicolumn{3}{l}{\textbf{Terms Introduced by this Thesis}}\\
-$\mathbb{ABC}$ && ABC \\
-DEF & \, & DEF \\
-\end{tabular}
+\multicolumn{3}{l}{\textbf{Terms Introduced by this Thesis}} \\
+AFID & & Anatomical fiducial \\
+AFLE & & Anatomical fiducial localization error \\
+AFRE & & Anatomical fiducial registration error \\
+\end{longtable}
+
 
 \newpage
 	
@@ -529,7 +587,6 @@ DEF & \, & DEF \\
 
 %Appendices.
 \begin{appendices}
-%\pagestyle{appendix}
 \input{app_ch2}
 \input{app_ch3}
 \input{app_ch4}
