@@ -14,45 +14,47 @@ Three-dimensional Cartesian coordinates (x, y, z) offer a convenient and precise
 The manual localization of brain landmarks is often time-intensive, cognitively demanding, and subject to inter-rater variability \cite{Abbass2022-lf, Lau2019-eh,Pallavaram2008-zr}. Even with detailed annotation protocols, raters require training to achieve consistency \cite{Lau2019-eh}. These challenges pose a barrier to scaling coordinate-based workflows across large datasets and neuroimaging pipelines. To address this bottleneck, deep learning (DL) methods offer a promising avenue for automatic landmark detection in brain MRI. These approaches typically fall into two paradigms: (1) coordinate regression \cite{Neupane2024-vt} and (2) heatmap-based localization \cite{Payer2016-ik}. In coordinate regression, a network directly outputs the x,y,z coordinates of each landmark (often via fully connected layers or global pooling). In heatmap-based methods, the network predicts a probability map (often a Gaussian “fuzzy” blob) for each landmark, and the peak of the heatmap is taken as the location. Heatmap regression has become especially popular because it retains spatial context and allows the network to localize landmarks in a fully convolutional manner.
 
 \subsection{Deep Learning Approaches}
-Deep learning has revolutionized computer vision over the past decade, with regression-based convolutional networks now widely used for tasks like facial landmark detection, pose estimation, and image registration \cite{Lathuiliere2018-oy}. While medical imaging adopted these tools more gradually, fully convolutional networks—particularly U-Net and its 3D variants—have since become foundational for segmentation and anatomical localization tasks \cite{Akkus2017-eh, Falk2019-us}. Variants such as V-Net and cascaded U-Nets improve spatial precision by capturing both global context and local detail, while architectures like the spatial configuration network (SCN) \cite{Payer2016-ik, Payer2019-sn} and multi-task cascaded CNNs \cite{Zhang2017-dc} embed geometric priors to enhance performance in data-scarce settings. More recently, self-configuring pipelines like nnLandmark \cite{Ertl2025-wu} and attention-based models such as H3DE-Net \cite{Huang2025-vt} have streamlined deployment and improved model efficiency. Despite these advances, relatively few studies have adapted such innovations to the detection of midline brain landmarks—such as the anterior and posterior commissures (AC and PC)—which are central to stereotactic targeting and coordinate-based neuroimaging. Given their consistent anatomy and clinical importance, AC-PC detection represents a promising use case for applying modern deep learning techniques to improve automation, reproducibility, and standardization in brain mapping workflows.
+Deep learning (DL) has revolutionized computer vision over the past decade, with regression-based convolutional networks now widely used for tasks like facial landmark detection, pose estimation, and image registration \cite{Lathuiliere2018-oy}. While medical imaging adopted these tools more gradually, fully convolutional networks—particularly U-Net and its 3D variants—have since become foundational for segmentation and anatomical localization tasks \cite{Akkus2017-eh, Falk2019-us}. Variants such as V-Net and cascaded U-Nets improve spatial precision by capturing both global context and local detail, while architectures like the spatial configuration network (SCN) \cite{Payer2016-ik, Payer2019-sn} and multi-task cascaded CNNs \cite{Zhang2017-dc} embed geometric priors to enhance performance in data-scarce settings. More recently, self-configuring pipelines like nnLandmark \cite{Ertl2025-wu} and attention-based models such as H3DE-Net \cite{Huang2025-vt} have streamlined deployment and improved model efficiency. Despite these advances, relatively limited studies have adapted such innovations to the detection of brain landmarks central to stereotactic targeting and coordinate-based neuroimaging \cite{Edwards2021-su}. Given their consistent anatomy and clinical importance, AC-PC detection represents a promising use case for applying modern deep learning techniques to improve automation, reproducibility, and standardization in brain mapping workflows.
 
 \subsection{Limitations in the field}
 Several barriers limit the broader utility of these DL techniques. First, well-annotated, publicly available datasets with standardized brain landmarks remain scarce, which constrains training, benchmarking, and validation. Second, many existing models are not open-source, are difficult to reproduce, or lack adherence to FAIR (Findable, Accessible, Interoperable, and Reusable) data principles. Third, to the best of our knowledge, no automated workflows are built in environments compatible with the Brain Imaging Data Structure (BIDS; (Gorgolewski et al., 2016)), which impedes integration with modern neuroimaging pipelines and limits accessibility for the broader scientific community. As a result, the full potential of automated coordinate-based analysis for applications such as registration quality control, brain morphometry, or lifespan brain charting remains underrealized.
 
 \subsection{Our Proposed Approach}
-In this work, we present AutoAFIDs, a BIDS-App for automatic landmark detection using deep learning. We trained and tested AutoAFIDs using a curated open-access dataset of MRI scans (n = 184) across a range of MRI field strengths (1.5, 3, and 7T) and conditions (healthy, abnormal ventricles, and neurodegenerative) with 20,000+ landmarks manually localized by human raters. AutoAFIDs demonstrated a landmark localization accuracy comparable to human raters. We showcase the broad utility of AutoAFIDs for two downstream applications which we make available to end-users: 1) quality control of image registration, 2) stereotactic target localization. By applying our model on over 5,000 MRI scans from individuals aged 18 to 100, we uncovered millimetric differences in brain structure that distinguish healthy aging from the early signs of neurodegenerative disease.
+In this work, we present AutoAFIDs, a BIDS-App for automatic landmark detection using deep learning. We trained and tested AutoAFIDs using a curated open-access dataset of MRI scans (n = 184) across a range of MRI field strengths (1.5, 3, and 7T) and conditions (healthy, abnormal ventricles, and neurodegenerative) with 20,000+ landmarks manually localized by human raters. AutoAFIDs demonstrated a landmark localization accuracy comparable to human raters. We showcase the broad utility of AutoAFIDs for two downstream applications which we make available to end-users: 1) quality control of image registration, 2) stereotactic target localization. By applying AutoAFIDs on over 5,000 MRI scans from individuals aged 18 to 100, we uncovered millimetric differences in brain structure that distinguish healthy brain changes from early signs of neurodegenerative disease.
 
 \section{Methods}
+
 \subsection{Problem Definition}
 
-The objective of this study is to detect anatomical landmarks distributed across multiple brain regions using a supervised deep learning framework. Let $\mathcal{V} \subset \mathbb{R}^3$ denote the 3D brain volume consisting of voxels $v \in \mathcal{V}$, and let $\{p_1, p_2, \ldots, p_L\}$ represent the set of $L$ target landmark coordinates, where each $p_\ell \in \mathbb{R}^3$ denotes the location of the $\ell^{\text{th}}$ anatomical point of interest.
+The objective of this study is to localize anatomical fiducial points distributed across multiple brain regions using a supervised deep learning framework. Let $\mathcal{V} \subset \mathbb{R}^3$ denote a 3D brain volume, and let $\{p_1, p_2, \ldots, p_L\}$ represent the set of $L$ target landmark coordinates, where each $p_\ell \in \mathbb{R}^3$ denotes the location of the $\ell^{\text{th}}$ anatomical point of interest.
 
-We adopt a \textit{heatmap-based regression} approach, in which the network learns to predict a continuous-valued 3D map for each landmark. Rather than modeling target heatmaps with Gaussian kernels centered on the landmark, we define the ground truth signal $H^\ell(v)$ for each landmark $\ell$ as a scaled Euclidean distance transform:
+We formulate this as a regression problem in which the model learns to predict a smooth, continuous-valued distance map centered on the target landmark. For each voxel $v \in \mathcal{V}$ and landmark $\ell$, the ground truth target $D^\ell(v)$ is defined as:
 
 \begin{equation}
-H^\ell(v) = \exp\left(-k \cdot \lVert v - p_\ell \rVert_2 \right)
+D^\ell(v) = \lVert v - p_\ell \rVert_2
 \end{equation}
 
-where $\lVert \cdot \rVert_2$ denotes the Euclidean distance between voxel $v$ and landmark $p_\ell$, and $k \in \mathbb{R}^+$ is a domain-informed scaling parameter that modulates spatial sensitivity. This formulation penalizes prediction errors more heavily near the true landmark, while retaining information over the global volume.
-
-Let $\hat{H}^\ell(v)$ be the predicted heatmap for landmark $\ell$. The network is trained using a voxel-wise mean squared error (MSE) loss between the predicted and target heatmaps, averaged across voxels:
+To enhance stability and spatial resolution, we apply an exponential decay to the predicted distance map:
 
 \begin{equation}
-\mathcal{L} = \frac{1}{L} \sum_{\ell=1}^L \frac{1}{|\mathcal{V}|} \sum_{v \in \mathcal{V}} \left( \hat{H}^\ell(v) - H^\ell(v) \right)^2
+T^\ell(v) = \exp(-\alpha \cdot D^\ell(v))
 \end{equation}
 
-This loss function encourages the network to learn spatially aware representations that reflect voxel proximity to the landmark of interest. During inference, the predicted landmark location $\hat{p}_\ell$ is obtained as the voxel with the maximum value in the predicted heatmap $\hat{H}^\ell$:
+where $\alpha$ is a fixed scaling factor controlling the spatial decay rate. During training, the model is supervised to match this transformed signal using voxelwise mean squared error (MSE):
 
 \begin{equation}
-\hat{p}_\ell = \arg\max_{v \in \mathcal{V}} \hat{H}^\ell(v)
+\mathcal{L} = \frac{1}{L} \sum_{\ell=1}^L \frac{1}{|\mathcal{V}|} \sum_{v \in \mathcal{V}} \left( \hat{T}^\ell(v) - T^\ell(v) \right)^2
 \end{equation}
 
 \subsection{Preprocessing and Data Preparation}
 
-We adopt standardized preprocessing profiles inspired by the nnU-Net framework \cite{Isensee2021-nnUNet}, with additional modifications tailored for anatomical landmark detection. All T1-weighted MRI scans undergo the following steps:
+We adopt standardized preprocessing profiles inspired by the nnU-Net framework \cite{Isensee2021-ev}, with additional modifications tailored for anatomical landmark detection. We build our workflow within a BIDS-compliant Snakemake pipeline integrating with PyBIDS (i.e., SnakeBIDS). Input data were T1-weighted structural MRIs, optionally converted from alternate contrasts (e.g., T2w, FLAIR, CT) using SynthSR \cite{Iglesias2023-co} when specified. Preprocessing steps were configured through predefined profiles (\texttt{superfast}, \texttt{fast}, \texttt{medium}, \texttt{slow}), allowing control over speed-accuracy tradeoffs.
+
+
+All T1-weighted MRI scans undergo the following steps:
 
 \begin{enumerate}
-    \item \textbf{Bias field correction:} N4ITK bias field correction is applied to mitigate intensity non-uniformities arising from scanner-related artifacts.
+    \item \textbf{Bias field correction:} N4 bias field correction is applied to mitigate intensity non-uniformities arising from scanner-related artifacts.
     
     \item \textbf{Intensity normalization:} Image intensities are normalized on a per-volume basis using robust z-score normalization, enhancing contrast between tissue boundaries relevant for landmark detection.
     
@@ -66,6 +68,31 @@ We adopt standardized preprocessing profiles inspired by the nnU-Net framework \
 \end{enumerate}
 
 Ground-truth heatmaps for each landmark are generated by computing the voxel-wise Euclidean distance to the target coordinate and applying an exponential decay function as described in Section~2.1.
+
+\subsection{Patch-Based Inference}
+
+Rather than processing the entire volume, the model predicts landmarks using a patch-based strategy. For each target landmark $\ell$, we extract a cubic patch of size $2r+1$ centered on a prior coordinate $p_\ell^{\text{prior}}$ obtained by registering a standard template (e.g., MNI space) to the subject’s native image. Let $\mathcal{P}_\ell$ denote the local patch centered on $p_\ell^{\text{prior}}$:
+
+\begin{equation}
+\mathcal{P}_\ell = \left\{ v \in \mathcal{V} \ \middle|\ \lVert v - p_\ell^{\text{prior}} \rVert_\infty \leq r \right\}
+\end{equation}
+
+The input to the network is a single-channel image patch, and the output is a distance map over $\mathcal{P}_\ell$. The predicted landmark $\hat{p}_\ell$ is extracted as the centroid of the thresholded exponential-transformed output:
+
+\begin{equation}
+\hat{p}_\ell = \text{centroid} \left( \left\{ v \in \mathcal{P}_\ell \ \middle|\ \exp(-\alpha \cdot \hat{D}^\ell(v)) > \tau \right\} \right)
+\end{equation}
+
+where $\tau$ is a percentile-based threshold (e.g., top 1\%) applied to suppress noisy responses and extract a coherent region.
+
+\subsection{Model Architecture and Training}
+
+Each landmark is predicted using a separate deep neural network trained independently. The shared architecture is a lightweight 3D convolutional neural network implemented in TensorFlow. Input patches are resampled to $64 \times 64 \times 64$ voxels and normalized to zero mean and unit variance. Training was performed using the Adam optimizer with early stopping on a validation set. The loss function is mean squared error between the predicted and target distance maps (after exponential transform), as described above.
+
+\subsection{Coordinate Transformation and Output}
+
+Final predictions are transformed from voxel to world coordinates using the subject-specific affine matrix stored in the NIfTI image header. Predicted coordinates are written in Slicer-compatible `.fcsv` format for downstream validation and visualization.
+
 
 \subsection{Model Design Rationale}
 In this work, we adopt a one-network-per-landmark training strategy. While many existing approaches predict all landmarks jointly using a multi-channel output architecture, we opt for training separate models for each anatomical point. This decision is motivated by two key considerations.
