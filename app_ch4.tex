@@ -11,3 +11,16 @@ All annotations were quality controlled by AT, JZ, and EC. To facilitate ease of
     \caption{Quality control visualization for anatomical landmark placement. Crosshairs indicate the annotated location of an example fiducial (the infracollicular sulcus [ICS]) in sagittal, coronal, and axial MRI views. Reviewers can toggle between the subject scan and the protocol-defined (template) annotation using the R key while navigating select slices in MRI volume using arrowkeys or slider.}
     \label{fig:figuresupQC}
 \end{figure}
+
+\newpage
+\section{Machine Learning Model Comparisons}\label{app:qualitycontrol}
+We compared two machine learning models for coordinate-to-coordinate regression of the subthalamic nucelus (STN). Ridgre regression exhibited statistically lower errors in Euclidean error when compared to XGBoost. No significant difference was observed in the z-direction. Statistical comparisons were performed using Wilcoxon test (paired samples) with Bonferroni correction (\(\alpha = 0.05/4\))
+
+
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figs/figuresupridgevsxgboost.png}
+    \caption{Comparison of prediction errors between Ridge regression and XGBoost across spatial axes and Euclidean distance (ED). Violin plots show the distribution of per-fold prediction errors for each evaluation metric: mean squared error along the x, y, and z axes (\texttt{mse\_x}, \texttt{mse\_y}, \texttt{mse\_z}), and overall Euclidean distance (ED). Results are grouped by model type. Asterisks indicate the significance of paired comparisons between models using the Wilcoxon signed-rank test (\textit{p}\(<\)0.05: *, \textit{p}\(<\)0.01: **, \textit{p}\(<\)0.001: ***, \textit{p}\(<\)0.0001: ****; ns: not significant).}
+    \label{fig:figuresupridgevsxgboost}
+\end{figure}
