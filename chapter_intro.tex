@@ -16,7 +16,7 @@ Stereotactic neurosurgery is a subspecialty of neurosurgery dedicated to targeti
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=0.85\linewidth]{figs/ch1_Figure_stereoframe.png}
+    \includegraphics[width=0.85\linewidth]{figs/ch1_Figure_stereoframe2.png}
     \caption{Key innovations in stereotactic neurosurgery and their associated reference spaces. (a) Horsley and Clarke’s \cite {Horsley1908-om} frame for cerebellar research, shown with their accompanying atlas. (b) Model V, the frame by Spiegel and Wycis \cite{Spiegel1947-rq} for human brain interventions, alongside their post-mortem reference brain. (c) Modern Leksell-style frame used in clinical practice, shown with common atlases such as Talairach \cite{Talairach1957-eb} and Schaltenbrand \cite{Schaltenbrand1977-ge}.}
     \label{fig:ch1_Figure_stereoframe}
 \end{figure}
@@ -30,7 +30,7 @@ A major advancement in intracranial localization came with the identification of
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=0.85\linewidth]{figs/ch1_Figure_templates.png}
+    \includegraphics[width=0.86\linewidth]{figs/ch1_Figure_templates2.png}
     \caption{Emergence of Stereotactic Spaces. (a) Classical Talairach space defined by stereotactic landmarks \cite{Talairach1957-eb}. (b) Early MRI-based average brain created in Talairach space \cite{Collins1994-dx}. (c) Modern templates \cite{Fonov2011-ck,Edlow2020-mo, Amunts2013-vu} improved using nonlinear registration.}
     \label{fig:ch1_Figure_templates}
 \end{figure}
@@ -56,7 +56,7 @@ DBS targets are located within an anatomically crowded and heterogeneous environ
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{figs/ch1_Figure_whymm.png}
+    \includegraphics[width=0.97\linewidth]{figs/ch1_Figure_whymm2.png}
     \caption{Why millimeters matter in deep brain stimulation (DBS). (a) Example from a population study showing DBS electrodes warped to a common atlas. (b) Correlation between electrode location and clinical outcome, illustrating how a difference of 2~mm (between patients \#51 and \#21) could correspond to a 60\% difference in therapeutic response. Figure in panel b is modified from an open-access article by \cite{Horn2018-qq}}
     \label{fig:ch1_Figure_whymm}
 \end{figure}
@@ -268,7 +268,7 @@ However, the value of fiducials can extend beyond ascertaining spatial correspon
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{figs/ch1_Figure_afidsvsoverlap.png}
+    \includegraphics[width=1\linewidth]{figs/ch1_Figure_afidsvsoverlap2.png}
     \caption{Head-to-head comparison of region-based overlap metrics and point-based metrics for evaluating spatial correspondence. (a) Schematic illustrating the computation of registration error metrics using either voxel-wise overlap between homologous regions (i.e., voxel overlap) and points (i.e., anatomical fiducial registration error; AFRE). (b) Abstraction of the anatomical fiducials (AFIDs) framework, with fiducial points distributed across three regions: pallidum (red), striatum (green), and thalamus (blue). (c,d) Trellis plots comparing region-based and point-based metrics. AFRE demonstrates a more unimodal distribution and a clearer, millimeter-scale dynamic range relative to voxel overlap metrics. Figure modified from an open-access article by \cite{Lau2019-eh}}
     \label{fig:ch1_Figure_afidsvsoverlap}
 \end{figure}
@@ -387,11 +387,11 @@ This BIDS-compliant framework provides a robust and extensible foundation for op
 
 \section{Thesis Outline and Objectives}
 
-This dissertation addresses the challenge of localizing brain structures with millimetric accuracy in a way that is scalable, interpretable, and clinically actionable. Deep brain stimulation surgery underscores the need to solve this challenge, where therapeutic targets such as the subthalamic nucleus are small, functionally heterogeneous, and situated within densely packed subcortical regions. Precise targeting is essential, yet the surgical planning process often relies—either directly or indirectly—on population-based maps generated through nonlinear image registration. These frameworks can introduce spatial errors on the same order as the targets themselves, complicating both individual treatment and broader scientific inference. At the same time, these same registration-based approaches are foundational to population neuroscience, where imaging data from many individuals is warped into a common stereotactic space to study brain structure, variability, and disease. In both settings—clinical and research—spatial uncertainty undermines confidence in localization and limits the translation of group-level findings to individual patients.
+This dissertation addresses the challenge of localizing brain structures with millimetric accuracy in a way that is scalable, interpretable, and clinically actionable. Deep brain stimulation surgery underscores the need to solve this challenge, where therapeutic targets such as the subthalamic nucleus are small, functionally heterogeneous, and situated within densely packed subcortical regions. Precise targeting is essential, yet the surgical planning process often relies on population-based maps generated through nonlinear image registration. These frameworks can introduce spatial errors on the same order as the targets themselves, complicating both individual treatment and broader scientific inference. At the same time, these same registration-based approaches are foundational to population neuroscience, where imaging data from many individuals is warped into a common stereotactic space to study brain structure, variability, and disease. In both settings—clinical and research—spatial uncertainty undermines confidence in localization and limits the translation of group-level findings to individual patients.
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{figs/ch1_Figure_Abstract.png}
+    \includegraphics[width=1\linewidth]{figs/ch1_Figure_Abstract2.png}
     \caption{Graphical abstract of dissertation projects. \textit{Chapter 2} is focused on validation of a brain landmark annotation protocol and open release of data. \textit{Chapter 3} employs deep learning to automatically localize brain landmarks in an open-source implementation. \textit{Chapter 4} is focused on leveraging data and models from prior chapters to solve the deep brain stimulation target localization problem.}
     \label{fig:Abstract}
 \end{figure}

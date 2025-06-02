@@ -90,7 +90,7 @@ The current version of the AFID protocol involves the placement of 32 landmarks.
 \label{tab:afid_list}
 \end{table}
 \newpage
-Fiducial localization error (FLE) is a term described by Fitzpatrick and colleagues\cite{Fitzpatrick1998-hp} that represents the distance between a fiducial position and its intended location. This term is commonly used when operating image-guidance systems during surgical procedures. In the context of the AFID protocol, and inspired by this extant terminology, we define the term \textbf{anatomical fiducial localization error (AFLE)}. This value, measured in millimeters, reflects the error arising from the placement (i.e., localization) of each fiducial. When used to communicate the accuracy of all AFIDs together, we refer to this as the \emph{global AFLE}. There are three contexts for applying AFLEs (Figure \ref{fig:ch2_Figure_AFLE}):
+Fiducial localization error (FLE) is a term described by Fitzpatrick and colleagues \cite{Fitzpatrick1998-hp} that represents the distance between a fiducial position and its intended location. This term is commonly used when operating image-guidance systems during surgical procedures. In the context of the AFID protocol, and inspired by this extant terminology, we define the term \textbf{anatomical fiducial localization error (AFLE)}. This value, measured in millimeters, reflects the error arising from the placement (i.e., localization) of each fiducial. When used to communicate the accuracy of all AFIDs together, we refer to this as the \emph{global AFLE}. There are three contexts for applying AFLEs (Figure \ref{fig:ch2_Figure_AFLE}):
 \begin{enumerate}
     \item \textbf{Mean AFLE:} Rater localization error relative to the intended location, defined as the mean placement of all raters for a specific fiducial (termed the \emph{ground truth AFID} in subsequent sections).
     \item \textbf{Inter-rater AFLE:} Rater localization error calculated as the pairwise distances between different rater placements. If a single rater performed the AFID protocol more than once, their mean placement coordinates were used for pairwise distance calculations.
@@ -216,7 +216,7 @@ In a similar fashion, global inter-rater AFLE was computed by measuring the pair
 
 In total, we release the curated AFID placements and associated imaging of six datasets and fourteen openly available human brain templates—a total of more than 20,000 manually placed anatomical landmarks, representing more than 300 hours of human rater annotation.
 
-All datasets have been deposited at DOI-issuing repositories such as Zenodo and OpenNeuro \cite{Taha2023-lt, Lau2023-db, Lau2023-op, Abbass2023-yl}, and conform to the Brain Imaging Data Structure (BIDS) directory hierarchy. Each dataset’s main directory contains (1) files about licensing and metadata, (2) imaging data directories organized per subject, and (3) a \texttt{derivatives} directory which includes AFID coordinates also organized per subject. We release both imaging and AFID annotation data. However, since some of the imaging datasets are protected under Data Usage Agreements (DUAs), the user needs to view and accept terms under DUAs before the imaging data becomes available for download.
+All datasets have been deposited at DOI-issuing repositories such as Zenodo and OpenNeuro \cite{Taha2023-lt, Lau2023-db, Lau2023-op, Abbass2023-yl}, and conform to the Brain Imaging Data Structure (BIDS) directory hierarchy. Each dataset’s main directory contains (1) files about licensing and metadata, (2) imaging data directories organized per subject, and (3) a \texttt{derivatives} directory which includes AFID coordinates also organized per subject. We release both imaging and AFID annotation data. However, since some of the imaging datasets are protected under Data Usage Agreements (DUAs), the user needs to view and accept terms under DUAs before download.
 
 For ease of acquiring the data, we merge released datasets and templates in a “super” dataset (\url{https://github.com/afids/afids-data}) which serves as a centralized repository for this data descriptor and can be used to install all of the imaging and AFID annotation data we release. In brief, the centralized repository (i.e., super dataset) has three main directories: (1) \texttt{data} — raw and curated coordinate files for datasets and templates alongside the MRI scans on which coordinates have been applied in BIDS format; (2) \texttt{notebooks} — code used for data curation and quality control; and (3) \texttt{other} — rater demographics, interactive glass brain showing applied coordinates, and a list of our curated brain landmarks.
 
@@ -224,33 +224,45 @@ Raw rater annotations were also released. These files have a \texttt{rater} labe
 
 The AFIDs coordinates are described using the Markups comma-separated values file (i.e., \texttt{*.fcsv}), which is generated after the raters save their placements on 3DSlicer. The \texttt{.fcsv} file contains coordinate data organized in rows for each of the 32 landmarks of interest, with columns describing the AFID and corresponding \texttt{x}, \texttt{y}, and \texttt{z} coordinates in native subject or template space. As for the imaging data, all dataset images used for annotations were BIDS compatible and made available in a compressed \texttt{NIfTI-1} format (i.e., \texttt{*.nii.gz}).
 
-We release our anatomical landmark annotations under the Attribution 4.0 International (CC BY 4.0) license, available in the \texttt{DERIVATIVE\_DATA\_USE\_AGREEMENT.txt} file at the level of each dataset. Meanwhile, imaging data are protected by DUAs which we make available in the \texttt{IMAGING\_DATA\_USE\_AGREEMENT.txt} file, also at the dataset level.
+We release our AFID annotations under the Attribution 4.0 International (CC BY 4.0) license. Meanwhile, imaging data are protected by DUAs which we make available in the \texttt{IMAGING\_DATA\_USE\_AGREEMENT.txt} file, also at the dataset level.
 
 
 \section{Technical Validation}
 As described in the Methods section, raters typically perform the AFID protocol by following the detailed documentation and training resources available online at \url{https://afids.github.io/afids-protocol}. To ensure that the placements we release are both accurate and reproducible across expert and novice raters, we computed the AFLE metrics for all datasets and templates. These metrics confirm that placements are generally within 1–2\,mm of the computed ground truth.  Table~\ref{tab:afle_metrics} summarizes the AFLE metrics computed for each annotated dataset and template. Across all performances of the AFID protocol, the global mean AFLE was $0.99 \pm 0.32$\,mm.
 
+To highlight a central use case of our released data in the context of image registration, we applied \texttt{fMRIPrep (v21.0.1)}; \cite{Esteban2019-oz} which is a commonly used neuroimaging software to analyze MRI data. \texttt{fMRIPrep (v21.0.1)} leverages ANTs \cite{Avants2008-ek} to perform deformable registration to a stereotactic space. The pipeline was run with default settings on all T1-weighted MRI scans (Figure \ref{fig:ch2_Figure_bias}a). Across the dataset, the median consensus AFRE was 1.79 ± 4.32 mm. To explore how MRI contrast introduced variability, we performed t-distributed Stochastic Neighbor Embedding (t-SNE) on the AFRE profiles. When visualized in two dimensions (Figure \ref{fig:ch2_Figure_bias}b), distinct clusters emerged based on MRI contrast, suggesting a qualitative bias introduced during registration. This observation has important implications for multi-center studies that aggregate data across varying acquisition protocols, as contrast-dependent registration errors may propagate into downstream analyses conducted in stereotactic space \cite{Hollunder2024-wc,Middlebrooks2024-gb}.
 
-\section{Usage Notes}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/ch2_Figure_bias.png}
+    \caption{MRI contrast biases registration error across datasets. (a) Axial view showing anatomical fiducial registration error (AFRE) across subjects in stereotactic space, with zoomed-in view of AFIDs 16, 24, and 26. Each colored dot represents the registered location of an AFID for a subject; white crosses indicate the ground truth location. Points are color-coded by dataset and scan type. (b) Dimensionality reduction of AFRE profiles using t-SNE (perplexity = 41) reveals contrast-dependent clustering. Each point represents a subject's AFRE profile across all AFIDs, colored by MRI type. Notably, 1.5T(GAD+) scans (orange) form a distinct cluster, suggesting modality-driven variance in registration outcomes. These findings highlight a qualitative bias introduced during registration, with potential implications for pooled multi-site analyses in stereotactic space.
+    }
+    \label{fig:ch2_Figure_bias}
+\end{figure}
+
+
+
+\section{Usage Notes and Data Access}
 We recommend loading the shared AFID annotation files (\texttt{*.fcsv}) in 3D Slicer alongside their associated imaging data, all of which are organized in BIDS format to facilitate intuitive navigation. The local neuroimaging datasets released in this work—specifically, LHSCPD and SNSX—will continue to undergo quality control and will be expanded as additional participants are recruited. Future versions of this data descriptor may include new anatomical landmarks, provided they meet validation criteria established in prior studies.
 
-Access to imaging data is granted once users accept the respective Data Usage Agreements (DUAs). Instructions for gaining access are provided with each dataset. For the \textbf{AFIDs-HCP} dataset, users must register for an account at the HCP portal (\url{https://db.humanconnectome.org}) and accept the DUA to receive an access key for use when cloning the repository. For the \textbf{AFIDs-OASIS} dataset, users must accept the DUA at \url{https://www.oasis-brains.org}, though no credentials are required for access. Permission to redistribute HCP and OASIS imaging data has been obtained. The locally generated \textbf{SNSX} and \textbf{LHSCPD} datasets are shared under a Creative Commons license, and thus no further user intervention is required for access.
+Access to imaging data is granted once users accept the respective Data Usage Agreements (DUAs). Instructions for gaining access are provided with each dataset. For the \textbf{AFIDs-HCP} dataset, users must register for an account at the HCP portal (\url{https://db.humanconnectome.org}) and accept the DUA to receive an access key for use when cloning the repository. For the \textbf{AFIDs-OASIS} dataset, users must accept the DUA at \url{https://www.oasis-brains.org}, though no credentials are required for access. Permission to redistribute HCP and OASIS imaging data has been obtained. The locally generated \textbf{SNSX} and \textbf{LHSCPD} datasets are shared under a Creative Commons license, and thus no further action is required.
 
 All datasets used in this study can be downloaded using DataLad (\cite{Halchenko2021-px}; \url{https://www.datalad.org/#install}, following acceptance of any required DUAs. After installing DataLad, users may retrieve the full collection with the following commands:
-\begin{verbatim}
+\begin{minted}[fontsize=\small, bgcolor=bg, linenos, breaklines]{yaml}
 datalad install -r https://github.com/afids/afids-data.git
 cd afids-data
 datalad get -r .
-\end{verbatim}
+\end{minted}
 
 Alternatively, users may choose to retrieve specific datasets or subsets by navigating to the desired subdirectory within the installed dataset and calling:
-\begin{verbatim}
+\begin{minted}[fontsize=\small, bgcolor=bg, linenos, breaklines]{yaml}
 datalad get -r .
-\end{verbatim}
+\end{minted}
 
-If DUA acceptance is required, the system will prompt users to enter relevant credentials before download. Additional information on accessing specific datasets and resolving download issues is available at our centralized repository. Although individual dataset repositories remain accessible, we strongly encourage users to download and work with the centralized dataset for consistency and ease of use.
+If DUA acceptance is required, the system will prompt users to enter relevant credentials before download. Additional information on accessing specific datasets and resolving download issues is available at our centralized repository. Although individual dataset repositories remain accessible, we strongly encourage users to download and work with the centralized dataset for consistency and ease of use. The code used for technical validation as well as prior AFID studies can be found on the GitHub repository page \url{https://github.com/afids}, including the validator tool \url{https://github.com/afids/afids-validator}.
 
-The code used for technical validation as well as prior AFID studies can be found on the GitHub repository page \url{https://github.com/afids}, including the validator tool \url{https://github.com/afids/afids-validator}.
+\section{Conclusion}
+In this work, we validated the AFIDs framework across a range of MRI field strengths, achieving a global AFLE of less than 1 mm. We also evaluated the global AFRE using a widely adopted neuroimaging pipeline and identified contrast-dependent registration bias related to MRI field strength. Importantly, we make all coordinate data publicly available to support downstream applications in image registration, automated landmark localization, and coordinate-based brain mapping.
 
 \begin{table}[ht]
 \centering

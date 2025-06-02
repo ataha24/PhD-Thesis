@@ -187,16 +187,16 @@ Pairwise correlations were computed among the x, y, and z coordinates of 16 AFID
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{figs/ch4_Figure_errs.png}
+    \includegraphics[width=1\linewidth]{figs/ch4_Figure_errs2.png}
     \caption{Model Performance on MRI modalities of Test-retest Datasets. a) shows model performance on 1.5T MRI with gadolinium (gad) and 7T MRI without gadolinium. b) shows model performance on 3T and 7T MRI. p \(>\) 0.1 across all axes and Euclidean distance. }
     \label{fig:ch4_Figure_errs}
 \end{figure}
 
-\textbf{Model Comparison and Performance Benchmarking:} We benchmarked our model against deformable registration (see Figure~\ref{fig:ch4_Figure_bench}a). On 1.5T MRI-gad scans, our model statistically outperformed registration ($p < 0.001$). Conversely, on multispectral 7T MRI-nogad data (i.e., registration warps computed using both T1 and T2 imaging), no significant difference in performance was observed between registration and our model ($p > 0.1$).
+\textbf{Model Comparison and Performance Benchmarking:} We benchmarked our model against deformable registration (see Figure~\ref{fig:ch4_Figure_bench2}a). On 1.5T MRI-gad scans, our model statistically outperformed registration ($p < 0.001$). Conversely, on multispectral 7T MRI-nogad data (i.e., registration warps computed using both T1 and T2 imaging), no significant difference in performance was observed between registration and our model ($p > 0.1$).
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{figs/ch4_Figure_bench.png}
+    \includegraphics[width=1\linewidth]{figs/ch4_Figure_bench2.png}
     \caption{Model Benchmarking. a) Our model outperformed registration on the 1.5T MRI-gad dataset (p \(<\) 0.001) and performed just as well when using multispectral 7T MRI data (p \(>\) 0.1). b) AFID localization error was moderately linearly correlated with model performance (Pearson r = 0.47). c) Generalization to nine other midbrain landmarks.}
     \label{fig:ch4_Figure_bench}
 \end{figure}
