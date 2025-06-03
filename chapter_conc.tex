@@ -2,25 +2,54 @@
 \newpage
 \sloppy
 \section{Summary of Contributions}
-This dissertation presents a coordinate-based framework for evaluating, localizing, and understanding human brain structure, with a particular focus on neurosurgical applications such as deep brain stimulation (DBS). It advances the use of anatomical fiducials (AFIDs) as a biologically meaningful, extensible, and interoperable system for brain morphometry and machine learning-driven analysis.
 
-Chapter 2 validated and released AFID data, a standardized set of 32 AFIDs sampling multiple brain strictures:
+This dissertation presents a coordinate-based framework for evaluating, localizing, and understanding human brain structure, with a focus on applications in stereotactic neurosurgery like deep brain stimulation (DBS). It advances the use of anatomical fiducials (AFIDs) as biologically grounded, interoperable landmarks for morphometric analysis and machine learning-driven localization. Across three core chapters, this work establishes a foundation for millimetric accuracy in neuroimaging pipelines through the integration of open datasets, automated tools, and rigorous benchmarking.
+
+\textbf{Chapter 2} introduces and validates the AFID protocol across diverse MRI datasets and clinical populations:
 \begin{itemize}
-    \item \textbf{Release of AFID Data:} Openly released all AFID data and imaging, addressing a need in the literature for curated brain coordinate data to enable various applications in automation and brain mapping.
-    \item \textbf{Benchmarking Registration:} Applied AFID data to evaluate commonly used image registration workflows, demonstrating that registration error varies by landmark and that conventional methods can introduce structure-specific distortions.
+    \item \textbf{Open Dataset Release:} Public dissemination of over 6,000 landmark coordinates and corresponding imaging data, filling a gap in the literature for high-quality, curated brain coordinate resources.
+    \item \textbf{Registration Benchmarking:} Application of AFIDs to evaluate commonly used registration workflows, revealing landmark-specific registration errors and highlighting structure-dependent distortions introduced by standard nonlinear methods.
+    \item \textbf{AFID Validator:} A website for the validation of AFID placement to guide end-user learning of neuroanatomy and MRI.
 \end{itemize}
 
-Chapter 3 developed and evaluated a deep learning pipeline (\texttt{AutoAFIDs}) that predicts AFID coordinates on T1-weighted MRI and packaged that in a BIDS-aware pipeline for large-scale neuroimaging analysis:
+\textbf{Chapter 3} develops \texttt{AutoAFIDs}, a deep learning pipeline for automated fiducial detection, and demonstrates its utility in morphometric analysis:
 \begin{itemize}
-    \item \textbf{Localization Evaluation:} Demonstrated millimetric prediction accuracy in test subjects, with error patterns aligning with human inter-rater variability.
-    \item \textbf{Registration Evaluation:} Demonstrated millimetric prediction accuracy in test subjects, with error patterns aligning with human inter-rater variability.
-    \item \textbf{Applications:} Demonstrated the utility of \texttt{AutoAFIDs} in analyzing anatomical variability across a large lifespan neuroimaging dataset, showing sex- and age-dependent trends and disease-specific structural shifts. Applied PCA to reveal population structure in AFID space, underscoring AFIDs’ potential for brain morphometry and neurodegeneration studies.
+    \item \textbf{Automated Localization:} Demonstrates millimetric prediction accuracy on held-out test subjects, with error distributions comparable to human inter-rater variability.
+    \item \textbf{Registration Quality Control:} Develops an automatic registration quality control at a per-subject level and integrates with commonly used neuroimaging software. 
+    \item \textbf{Lifespan Morphometry:} Uses pairwise AFID distances to chart age-, sex-, and disease-related trends in brain structure across a lifespan cohort, supporting the feasibility of coordinate-based brain charting.
 \end{itemize}
 
-Chapter 4 applied the AFID coordinate data to localize obscure stereotactic neurosurgical targets, particularly the subthalamic nucleus (STN):
+\textbf{Chapter 4} extends the coordinate-based framework to the prediction of deep brain stimulation (DBS) targets, using anatomical fiducials (AFIDs) to estimate the location of subcortical structures that are often obscured on conventional MRI:
 \begin{itemize}
-    \item \textbf{Localization Error Analysis:} Quantified localization error of registration-based and CNN-based STN targeting methods using AFID-based ground truth.
-    \item \textbf{Dataset-Specific Bias:} Revealed systematic biases in target predictions across imaging modalities (e.g., 7T vs. 1.5T with gadolinium) and subjects.
-    \item \textbf{Human vs. Model Comparison:} Compared human annotations to CNN predictions, showing that AFID-based pipelines can approach expert-level accuracy and offer interpretable alternatives to black-box models.
-    \item \textbf{Tool Development:} Released a reproducible benchmarking pipeline to support ongoing evaluation of registration and localization tools in neurosurgical contexts.
+    \item \textbf{Coordinate-to-Coordinate Modeling:} Demonstrated that AFID coordinates can serve as informative and spatially grounded features for predicting the location of the subthalamic nucleus (STN), bypassing the need for voxelwise image input.
+    \item \textbf{Paired-Modality Benchmarking:} Leveraged a unique dataset of paired 7T and 1.5T (Gadolinium-enhanced) MRI from the same subjects to benchmark registration- and prediction-based STN localization, revealing modality-dependent errors in registration pipelines that were mitigated by AFID-based models.
 \end{itemize}
+
+
+
+\section{Future Directions}
+
+This dissertation lays a foundation for coordinate-based surgical targeting, registration evaluation, and brain morphometry, yet several important questions and opportunities remain: 
+
+\textbf{Expansion to additional DBS targets}: A natural extension of this work is to expand AFID-based targeting beyond the subthalamic nucleus (STN) to include other structures relevant to neuromodulation. These may include the globus pallidus internus (GPi), zona incerta (ZI), and various thalamic subnuclei—all of which are implicated in current or emerging DBS indications such as dystonia, essential tremor, or treatment-resistant depression. Many of these structures are anatomically adjacent to known AFIDs or share spatial relationships that may be similarly learned using coordinate-to-coordinate models. As such, expanding the annotation framework and training models for additional targets could transform the AFID pipeline into a general-purpose targeting system.
+
+\textbf{Multimodal learning}: While this dissertation focused primarily on structural T1-weighted MRI, there is significant potential to incorporate multimodal imaging data in future model development. Modalities such as T2-weighted MRI, quantitative susceptibility mapping (QSM), and diffusion MRI (dMRI) provide complementary information about tissue boundaries, iron content, and white matter tracts, respectively—features critical for identifying DBS targets that are small, iron-rich, or embedded in complex anatomical neighborhoods. Integrating these modalities through data harmonization or contrast-aware learning could improve localization accuracy and extend the generalizability of models to diverse clinical imaging protocols. Given the demonstrated robustness of \texttt{AutoAFIDs} across field strengths and acquisition parameters, there is a promising trajectory toward training models that are explicitly multimodal or contrast-invariant.
+
+\textbf{Normative coordinate charts}: Another avenue of development lies in leveraging the large-scale AFID datasets compiled in this work to build normative “coordinate charts” of brain structure. Analogous to pediatric growth charts, these models could describe expected pairwise distances or landmark configurations across the lifespan. Such coordinate-based atlases could enable early detection of abnormal structural patterns or aid in stratifying disease severity based on deviations from normative trajectories. The peudo-longitudinal lifespan data used in Chapter~3 already hint at age- and disease-related changes in midline and periventricular distances; future work could build on these findings with larger longitudinal datasets.
+
+\textbf{Prospective clinical integration}: In parallel, clinical integration of \texttt{AutoAFIDs} offers a critical opportunity to test its real-world impact. While this dissertation demonstrated high accuracy on retrospective imaging, deployment into neurosurgical workflows would allow evaluation of usability, runtime, and influence on surgical decision-making. Importantly, the automated pipeline offers advantages in low-resource settings or for cases with suboptimal imaging, where registration-based methods are more error-prone. Embedding the system into surgical planning software (e.g., Lead-DBS or 3D Slicer) and testing it during target selection or electrode implantation would provide valuable prospective validation. 
+
+\textbf{Beyond anatomy—toward connectivity}: Beyond structural localization, future work may also incorporate connectivity-based frameworks. Current DBS paradigms increasingly recognize the importance of network-level effects, with stimulation modulating not just local structures but distributed circuits. By anchoring connectivity models (derived from dMRI or functional MRI) to interpretable AFID coordinates, future pipelines could offer hybrid approaches that combine anatomical accuracy with physiological relevance. This may enable targeting not just of regions, but of fiber pathways or functional hubs most likely to mediate therapeutic benefit.
+
+\textbf{Reduced-dependency pipelines}: Finally, an important direction for improving scalability is to reduce dependency on full-protocol AFID annotation. While 32 landmarks offer comprehensive spatial coverage, certain subsets may be sufficient to estimate particular targets. Learning the minimal set of landmarks required for accurate prediction could reduce computational burden and improve usability in clinical environments. This could lead to a stratified pipeline where only the most informative landmarks are placed—or automatically predicted—depending on the clinical context.
+
+In sum, while this dissertation establishes a robust and interpretable infrastructure for coordinate-based analysis, its future lies in broader anatomical coverage, multimodal learning, normative modeling, and clinical translation. Together, these directions aim to make DBS targeting not only more precise but also more accessible, scalable, and biologically informed.
+
+
+\section{Conclusions}
+
+This dissertation advances a coordinate-based framework for neuroimaging and stereotactic neurosurgery by integrating AFIDs, machine learning, and open infrastructure. Across three core chapters, we demonstrate that spatially precise, interpretable, and scalable analysis pipelines can be built around point-based representations of brain anatomy. In Chapter~2, we established and validated a 32-point anatomical landmark protocol across diverse MRI datasets, revealing millimetric registration errors and supporting robust image quality control. Chapter~3 introduced \texttt{AutoAFIDs}, a deep learning pipeline that achieved submillimetric accuracy in automated landmark detection and enabled population-level brain charting through coordinate-derived morphometric features. Chapter~4 extended this framework to predict stereotactic targets such as the subthalamic nucleus, surpassing deformable registration in accuracy under clinical imaging conditions and demonstrating compatibility with ultra-high field ground truth.
+
+Together, these contributions support a paradigm shift toward coordinate-centric representations in neurosurgical image analysis—where structure, error, and variability are expressed in biologically meaningful, millimeter-scale terms. Unlike voxelwise methods that often obscure spatial context, AFID-based pipelines preserve anatomical interpretability, enable localized quality control, and foster modular model development. This dissertation provides open tools and datasets that are compatible with the Brain Imaging Data Structure (BIDS), promoting reproducibility and extensibility across centers.
+
+Ultimately, this work bridges classical stereotactic principles with modern machine learning, offering a clinically relevant validation to neuroimaging pipelines. As neurosurgical applications continue to demand higher spatial fidelity, individualized targeting, and interpretability, coordinate-based methods stand poised to meet these needs—supporting not only more accurate surgical interventions but also deeper insights into brain structure and variability across health and disease.

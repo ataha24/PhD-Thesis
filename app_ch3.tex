@@ -6,17 +6,17 @@
 \label{app:yaml}
 The \texttt{snakebids.yaml} file defines user-facing options and input configurations for executing the AutoAFIDs workflow as a BIDS-App. While the file includes structural elements necessary for Snakebids compatibility, its most relevant components are those that control the behavior of the workflow based on user-defined parameters:
 \begin{itemize}
-  \item \textbf{\texttt{--modality}}: Specifies the input image type to process. Supported values include \texttt{T1w}, \texttt{T2w}, \texttt{FLAIR}, and \texttt{ct}.
+  \item \textbf{\texttt{--modality}}: Specifies the input image type to process. Supported values include \texttt{T1w}, \texttt{T2w}, \texttt{FLAIR}, and \texttt{ct}. If this flag is not provided, \texttt{T1w} modality is run by default.
   
   \item \textbf{\texttt{--procprofile}}: Controls the preprocessing intensity. Options include \texttt{slow}, \texttt{medium}, \texttt{fast}, and \texttt{superfast}. The default is \texttt{fast}.
   
-  \item \textbf{\texttt{--norm}}: Chooses the intensity normalization strategy. Options are \texttt{0} (z-score normalization) and \texttt{1} (min-max normalization). Tissue-based normalization (\texttt{2}) is reserved for future use.
+  \item \textbf{\texttt{--norm}}: Chooses the intensity normalization strategy. Options are \texttt{0} (z-score normalization) and \texttt{1} (min-max normalization).
   
   \item \textbf{\texttt{--res}}: Sets the target isotropic resolution for resampling (e.g., \texttt{100} for 1~mm). This allows the user to balance accuracy and runtime efficiency.
   
   \item \textbf{\texttt{--participant\_label}} and \textbf{\texttt{--exclude\_participant\_label}}: Control which BIDS subjects are included or excluded from the current run. Multiple subjects can be specified as a space-separated list.
   
-  \item \textbf{\texttt{--stereotaxy}}: Enables prediction of stereotactic coordinates (e.g., for DBS targets). Supported options include \texttt{STN} and \texttt{cZI}. When specified, the workflow also outputs the associated AC–PC transform matrix.
+  \item \textbf{\texttt{--stereotaxy}}: Enables prediction of stereotactic coordinates (e.g., for DBS targets). Supported options include \texttt{STN} and \texttt{cZI}. When specified, the workflow also outputs the associated AC–PC transform matrix. This feature implements the models built in Chapter \ref{chap:afidspred}.
   
   \item \textbf{\texttt{--fidqc}}: Toggles the generation of interactive HTML quality control reports for AFID placements. This is disabled by default but can be enabled with the \texttt{--fidqc} flag.
   
