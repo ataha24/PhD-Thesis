@@ -220,10 +220,9 @@ AutoAFIDs provides an optional registration quality control (QC) module that gen
 
 The registration QC module in AutoAFIDs can be invoked as part of the BIDS-App command-line interface. To enable QC report generation, users must provide a directory containing their Lead-DBS derivative files. A typical invocation is shown below:
 
-\begin{verbatim}
-autoafids <BIDS_DIR> <DERIVATIVES_DIR> participant
---LEAD-DBS-DIR <PATH_TO_LEAD-DBS_Directory>
-\end{verbatim}
+\begin{minted}[fontsize=\small, bgcolor=bg, linenos, breaklines]{bash}
+autoafids <BIDS_DIR> <DERIVATIVES_DIR> participant --LEAD-DBS-DIR <PATH_TO_LEAD-DBS_Directory>
+\end{minted}
 
 This command runs the QC module on all subjects found in the BIDS directory, compares registered AFIDs to reference space, and saves the resulting HTML reports to the specified output directory. Each report includes per-subject error statistics, slice-wise visual inspection panels, a heatmap of landmark errors, and a 3D displacement plot. This functionality is integrated into the default workflow and designed for seamless use in automated pipelines.
 \begin{figure}
