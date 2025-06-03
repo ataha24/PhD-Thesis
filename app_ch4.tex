@@ -7,7 +7,7 @@ All annotations were quality controlled by AT, JZ, and EC. To facilitate ease of
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=0.95\linewidth]{figs/figuresupQC.png}
+    \includegraphics[width=1\linewidth]{figs/figuresupQC.png}
     \caption{Quality control visualization for anatomical landmark placement. Crosshairs indicate the annotated location of an example fiducial (the infracollicular sulcus [ICS]) in sagittal, coronal, and axial MRI views. Reviewers can toggle between the subject scan and the protocol-defined (template) annotation using the R key while navigating select slices in MRI volume using arrowkeys or slider.}
     \label{fig:figuresupQC}
 \end{figure}
@@ -20,7 +20,18 @@ We compared two machine learning models for coordinate-to-coordinate regression 
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=0.95\linewidth]{figs/figuresupridgevsxgboost.png}
+    \includegraphics[width=1\linewidth]{figs/figuresupridgevsxgboost.png}
     \caption{Comparison of prediction errors between Ridge regression and XGBoost across spatial axes and Euclidean distance (ED). Violin plots show the distribution of per-fold prediction errors for each evaluation metric: mean squared error along the x, y, and z axes (\texttt{mse\_x}, \texttt{mse\_y}, \texttt{mse\_z}), and overall Euclidean distance (ED). Results are grouped by model type. Asterisks indicate the significance of paired comparisons between models using the Wilcoxon signed-rank test (\textit{p}\(<\)0.05: *, \textit{p}\(<\)0.01: **, \textit{p}\(<\)0.001: ***, \textit{p}\(<\)0.0001: ****; ns: not significant).}
     \label{fig:figuresupridgevsxgboost}
+\end{figure}
+
+\newpage
+\section{AFIDs Stereotaxy Website}\label{app:stereotaxy}
+We packaged our model and deployed it on a website (\url{https://stereotaxy.afids.io/}) along side the factored protocol of the 16 anatomical fiducials used to predict the subthalamic nucleus. Figure \ref{fig:figuresupstereotaxy} provides a snapshot of the website for completeness. 
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/figuresupstereotaxy.png}
+    \caption{Users can upload anatomical fiducial (AFID) annotations in \texttt{.fcsv} format, typically generated using 3D Slicer. Currently, the platform supports target prediction for the subthalamic nucleus (STN), with plans to expand support to additional structures such as the caudal zona incerta and various thalamic subnuclei. Upon submission, the selected model runs on the backend and returns predicted target coordinates in both native and AC--PC space. The platform also includes a protocol panel displaying the reduced protocol, currently consisting of 16 AFIDs.}
+    \label{fig:figuresupstereotaxy}
 \end{figure}
