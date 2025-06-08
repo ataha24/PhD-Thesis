@@ -342,13 +342,7 @@ A CNN layer applies a learnable kernel \( w \in \mathbb{R}^{k \times k \times k}
 
 where $h^{(l)}_k$ denotes the \(k\)-th feature map at layer \(l\), $*$ denotes convolution, and \(\sigma\) is an activation function. Deeper layers encode increasingly abstract representations by combining low-level features such as edges and textures into complex anatomical or pathological patterns.
 
-One of the most influential architectures in biomedical image analysis is the U-Net \cite{Ronneberger2015-xm}, which uses an encoder–decoder structure to balance semantic context with spatial precision (Figure \ref{fig:ch1_Figure_UNET}). The encoder applies convolution and downsampling layers to extract global features, while the decoder path upsamples these features to recover spatial resolution using transposed convolutions. Crucially, skip connections between corresponding encoder and decoder layers allow early high-resolution features to be directly reused—preserving fine-grained spatial information that might otherwise be lost through pooling. Formally, the decoder reconstructs a segmentation map $\hat{Y} \in \mathbb{R}^{H \times W \times K}$ from a compressed latent representation $Z$ by applying learned upsampling operators:
-
-\begin{equation}
-    \hat{Y} = f_{\text{decoder}}(Z) = f^{(L)}_{\text{up}} \circ \cdots \circ f^{(1)}_{\text{up}}(Z),
-\end{equation}
-
-where each $f^{(i)}_{\text{up}}$ includes convolutional and skip-connection layers. The inclusion of skip connections between corresponding encoder and decoder levels allows the model to retain fine-grained spatial information that would otherwise be lost through pooling.
+One of the most influential architectures in biomedical image analysis is the U-Net \cite{Ronneberger2015-xm}, which uses an encoder–decoder structure to balance semantic context with spatial precision (Figure \ref{fig:ch1_Figure_UNET}). The encoder applies convolution and downsampling layers to extract global features, while the decoder path upsamples these features to recover spatial resolution using transposed convolutions. Crucially, skip connections between corresponding encoder and decoder layers allow early high-resolution features to be directly reused—preserving fine-grained spatial information that might otherwise be lost through pooling. Formally, the decoder reconstructs a segmentation map $\hat{Y} \in \mathbb{R}^{H \times W \times K}$ from a compressed latent representation $Z$ by applying learned upsampling operators. The inclusion of skip connections between corresponding encoder and decoder levels allows the model to retain fine-grained spatial information that would otherwise be lost through pooling.
 
 U-Nets are typically trained using voxel-wise loss functions such as cross-entropy or the Dice coefficient:
 
