@@ -428,24 +428,27 @@ Chair of the Thesis Examination Board
 \input{coauthorship_statement}
 \vfill
 \newpage
-
-\clearpage
-
 \thispagestyle{empty}
-\null\vfill
-{
-	\settowidth\longest{\Large\itshape Planning to write is not writing. Outlining, researching,}
-	\centering
-	\hspace{3cm}\parbox{\longest}{%
-		\raggedright{\Large\itshape%
-      Alone we can do so little; together we can do so much.\par\bigskip
-		}   
-		\raggedleft\MakeUppercase{--Helen Keller}\par%
-}}
+\vspace*{\fill}
 
-\vfill
+\begin{flushleft}
+\hspace{3cm}
+\begin{minipage}{0.6\textwidth}
+\setstretch{1} 
+  {\Large\itshape
+  We shall not cease from exploration\\
+  And the end of all our exploring\\
+  Will be to arrive where we started\\
+  And know the place for the first time.\par\bigskip}
+  \hfill\MakeUppercase{--T.S. Eliot}\\
+  \hfill\textit{“Little Gidding”, Four Quartets}
+\end{minipage}
+\end{flushleft}
 
+\vspace*{\fill}
 \newpage
+
+
 
 \phantomsection
 \addcontentsline{toc}{chapter}{Acknowledgments}
@@ -498,6 +501,7 @@ Chair of the Thesis Examination Board
 3D & & Three-dimensional \\
 7T & & Seven Tesla \\
 AC & & Anterior commissure \\
+PC & & Posterior commissure \\
 AC-PC & & Anterior–posterior commissure \\
 BG & & Basal ganglia \\
 CNR & & Contrast-to-noise ratio \\
@@ -505,8 +509,8 @@ CSF & & Cerebrospinal fluid \\
 DBS & & Deep brain stimulation \\
 GM & & Gray matter \\
 IC & & Internal capsule \\
-PC & & Posterior commissure \\
 PD & & Parkinson’s disease \\
+AD & & Alzheimer's disease \\
 RN & & Red nucleus \\
 ROI & & Region of interest \\
 SNR & & Signal-to-noise ratio \\
@@ -514,9 +518,11 @@ STN & & Subthalamic nucleus \\
 VTA & & Volume of tissue activated \\
 WM & & White matter \\
 ZI & & Zona incerta \\
+DISTAL & & DBS Intrinsic Template AtLas \\
 \\
 \multicolumn{3}{l}{\textbf{Medical Imaging Terminology}} \\
 BIDS & & Brain Imaging Data Structure \\
+MRI & & Magnetic resonance imaging \\
 CT & & Computed tomography \\
 DICOM & & Digital Imaging and Communications in Medicine \\
 DTI & & Diffusion tensor imaging \\
@@ -525,7 +531,6 @@ FGATIR & & Fast Gray Matter Acquisition T1 Inversion Recovery \\
 FLAIR & & Fluid-attenuated inversion recovery \\
 MP2RAGE & & Magnetization-prepared 2 rapid gradient echoes \\
 MPRAGE & & Magnetization-prepared rapid acquisition gradient echo \\
-MRI & & Magnetic resonance imaging \\
 NIfTI & & Neuroimaging Informatics Technology Initiative \\
 NMR & & Nuclear magnetic resonance \\
 QSM & & Quantitative susceptibility mapping \\
@@ -539,9 +544,11 @@ TR & & Repetition time \\
 UHF & & Ultra-high field \\
 \\
 \multicolumn{3}{l}{\textbf{Machine Learning and Image Processing Terminology}} \\
+GPU & & Graphics processing units \\
 ANN & & Artificial neural network \\
 CNN & & Convolutional neural network \\
 DL & & Deep learning \\
+MSE & & Mean squared error \\
 ED & & Euclidean distance \\
 ML & & Machine learning \\
 nnU-Net & & No-new-Unet (self-configuring U-Net) \\

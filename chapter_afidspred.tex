@@ -3,7 +3,7 @@
 \sloppy
 This chapter is largely based on:
 \begin{itemize}[noitemsep,topsep=0pt]
-	\item Taha, A., Abbass M., Snyder, M., et al. Optimizing indirect localization of deep brain targets using anatomical fiducials and machine learning. In-Prep.
+	\item Taha, A., Abbass M., Snyder, M., et al. Optimizing indirect localization of deep brain targets using anatomical fiducials and machine learning. In Preparation.
 \end{itemize}
 
 \section{Introduction}
@@ -24,7 +24,7 @@ Existing methods for indirect localization can be grouped into two categories: (
 Machine learning (ML) models for automatic localization of brain structures have gained significant interest offering a faster and more generalizable alternative to deformable registration \cite{Baniasadi2023-lm, Ren2025-zu}. However, only a limited number of studies evaluated and adapted ML frameworks to the small DBS targets while achieving generalizability on clinical quality (e.g., MRI-gad) scans \cite{Baniasadi2023-lm}. Furthermore, due to the intensive process of acquiring manual ground-truth labels, many approaches have focused on matching accuracy of well-curated parameters during deformable registration approaches (i.e., training labels generated from quality controlled deformable registration segmentation data) \cite{Baniasadi2023-lm}.
 
 \subsection{Coordinate-to-Coordinate Machine Learning Framework}
-In this study, we validate an ML framework to accurately localize brain structures solely from $x$, $y$, $z$ coordinates of surrounding anatomical landmarks (i.e., coordinate-to-coordinate). Our target localization approach is dependent only on validated anatomical landmarks inspired from classical stereotactic methods \cite{Lau2019-eh, Abbass2022-lf}, which are reproducible across various MRI field strengths and modalities (see Chapter \ref{chap:afidsdata}). This framework was designed with generalizability and explainability in mind, such that it can be applied to other brain targets while enabling understanding of relationships between predefined landmarks and the targeted brain region, including structures targeted in DBS (i.e., STN). Our framework integrates well within the clinical workflow, which already involves preoperative localization of landmarks (e.g., AC and PC). Central to our approach is an open-source framework, which involves the release of our coordinate data, code, and our framework in the form of a website \url{www.stereotaxy.afids.io}.
+In this study, we validate an ML framework to accurately localize brain structures solely from $x$, $y$, $z$ coordinates of surrounding anatomical landmarks (i.e., coordinate-to-coordinate). Our target localization approach is dependent only on validated anatomical landmarks inspired from classical stereotactic methods \cite{Lau2019-eh, Abbass2022-lf}, which are reproducible across various MRI field strengths and modalities (see Chapter \ref{chap:afidsdata}). This framework was designed with generalizability and explainability in mind, such that it can be applied to other brain targets while enabling understanding of relationships between predefined landmarks and the targeted brain region, including structures targeted in DBS (i.e., STN). Our framework integrates well within the clinical workflow, which already involves preoperative localization of landmarks (e.g., AC and PC). Central to our approach is an open-source framework, which involves the release of our coordinate data, code, and our framework in the form of a website \url{https://stereotaxy.afids.io}.
 
 \begin{figure}[hbt!]
     \centering
@@ -47,7 +47,7 @@ We leverage 202 MRI scans on which we have more than 6,500 ground truth anatomic
 \texttt{A subset of a previously released (afids-data) dataset}, which aggregated brain landmark annotations (n = 110) on various populations (healthy, abnormal ventricular size, and PD). The participants in this subset are independent of the previously mentioned datasets.
 
 \subsection{Coordinate Data Annotation}
-We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (available on \url{www.stereotaxy.afids.io}) described by the protocol that: (1) circumscribe the midbrain and surrounding structures (e.g. DBS targets) and (2) can be localized within 1 mm.
+We employ a previously validated protocol for the annotation of anatomical fiducials (AFIDs; \url{https://afids.github.io/afids-protocol}) providing a point-based sampling of multiple brain structures. In this study, we selected a subset of 16 AFIDs (available on \url{https://stereotaxy.afids.io}) described by the protocol that: (1) circumscribe the midbrain and surrounding structures (e.g. DBS targets) and (2) can be localized within 1 mm.
 
 \begin{table}[h!]
 \centering
@@ -212,7 +212,7 @@ We evaluated the functionality of our website using two illustrative DBS cases f
 We demonstrated that coordinates of predefined brain landmarks can be leveraged to predict the coordinates of other surrounding brain regions with millimetric accuracy. By employing a coordinate-to-coordinate ML framework, our model is agnostic to MRI modality and resolution. Furthermore, we demonstrated that our model outperforms conventional methods when using challenging clinical-grade scans (e.g., 1.5-T MRI-gad) and performs just as well when using multispectral research-grade scans (i.e., 7-T MRI). Finally, we packaged this model in the form of a website, enabling its use in clinical and neuroimaging contexts.
 
 \subsection{Rater Curated Data}
-\textbf{AFID Annotations.} Previous AFID validation studies demonstrated millimetric localization in healthy \cite{Lau2019-eh} and clinical populations \cite{Abbass2022-lf}. The subset of 16 AFIDs in our ML framework were selected for their spatial proximity to the STN, sampling the morphology of the midbrain region. Although the complete AFIDs protocol (i.e., 32 AFIDs) typically requires 20–40 minutes following rater training, we anticipate a substantial reduction in annotation time due to the reduced number of AFIDs used here. To facilitate reproducibility and completeness, we provide a website embedded protocol tailored to the 16 AFIDs used in this work: \url{https://stereotaxy.afids.io/}.
+\textbf{AFID Annotations.} Previous AFID validation studies demonstrated millimetric localization in healthy \cite{Lau2019-eh} and clinical populations \cite{Abbass2022-lf}. The subset of 16 AFIDs in our ML framework were selected for their spatial proximity to the STN, sampling the morphology of the midbrain region. Although the complete AFIDs protocol (i.e., 32 AFIDs) typically requires 20–40 minutes following rater training, we anticipate a substantial reduction in annotation time due to the reduced number of AFIDs used here. To facilitate reproducibility and completeness, we provide a website embedded protocol tailored to the 16 AFIDs used in this work: \url{https://stereotaxy.afids.io}.
 \begin{figure}[hbt!]
     \centering
     \includegraphics[width=1\linewidth]{figs/ch4_Figure_clincase.png}
