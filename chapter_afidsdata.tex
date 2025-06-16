@@ -3,9 +3,12 @@
 \sloppy
 \noindent This chapter is largely based on:
 \begin{itemize}[noitemsep,topsep=0pt]
-	\item Taha, G. Gilmore, M. Abbass, et al. Magnetic resonance imaging datasets with anatom-
-ical fiducials for quality control and registration. Scientific Data, 10:449, 2023.
+    \begin{small}
+    \item
+    A. Taha, G. Gilmore, M. Abbass, J. Kai, T. Kuehn, J. Demarco, G. Gupta, C. Zajner, D. Cao, R. Chevalier, A. Ahmed, A. Hadi, B.G. Karat, O.W. Stanley, P.J. Park, K.M. Ferko, D. Hemachandra, R. Vassallo, M. Jach, A. Thurairajah, S. Wong, M.C. Tenorio, F. Ogunsanya, A.R. Khan, J.C. Lau.
+    \end{small} Magnetic resonance imaging datasets with anatomical fiducials for quality control and registration. \textit{Scientific Data}, 10:449, 2023.
 \end{itemize}
+
 \section{Background and Summary}
 Open resources available for reproducible, quantitative assessment of brain correspondence have been limited. The most common metrics employed for the purpose of examining the quality of image registration, including the Jaccard similarity and Dice kappa coefficients, compute the voxel overlap between regions of interest (ROIs), which have been shown to be insufficiently sensitive when used in isolation or in combination for validating image registration strategies \cite{Rohlfing2012-kt}. The ROIs used in voxel overlap are often larger subcortical structures that are readily visible on magnetic resonance imaging (MRI) scans (e.g., the thalamus, globus pallidus, and striatum), and thus lack the ability to detect subtle misregistration between images which may be crucial where millimetric differences in variability should be accounted for \cite{Rohlfing2012-kt,Lau2019-eh,Abbass2022-lf,Chakravarty2009-kq}.
 
