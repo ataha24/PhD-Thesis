@@ -112,3 +112,69 @@ We packaged our model and deployed it on a website (\url{https://stereotaxy.afid
     \caption{Users can upload anatomical fiducial (AFID) annotations in \texttt{.fcsv} format, typically generated using 3D Slicer. Currently, the platform supports target prediction for the subthalamic nucleus (STN), with plans to expand support to additional structures such as the caudal zona incerta and various thalamic subnuclei. Upon submission, the selected model runs on the backend and returns predicted target coordinates in both native and AC--PC space. The platform also includes a protocol panel displaying the reduced protocol, currently consisting of 16 AFIDs.}
     \label{fig:figuresupstereotaxy}
 \end{figure}
+
+\newpage
+\section{Running the STN prediction model within AutoAFIDs}\label{app:stereotaxyautoafids}
+We integrated STN prediction directly into the \texttt{AutoAFIDs} pipeline (Chapter~\ref{chap:AutoAFIDs}). Users can invoke the STN prediction model using the \texttt{--stereotaxy <target>} flag. For example, to predict the STN, the following command is used:
+
+\begin{minted}[fontsize=\small, bgcolor=bg, linenos, breaklines]{bash}
+autoafids <BIDS_DIR> <DERIVATIVES_DIR> participant --stereotaxy STN
+\end{minted}
+
+This generates a structured output directory containing logs, predicted landmarks, and supporting metadata. An example output directory is shown below:
+
+\begin{figure}[hbt!]
+    \includegraphics[width=0.7\linewidth]{figs/output_directory_structure.png}
+    \caption{Example output directory structure after running STN prediction using \texttt{AutoAFIDs}. The predicted STN coordinates are saved in both AC-PC and native space within the \texttt{stereotaxy} folder.}
+    \label{fig:fidsoutputspred}
+\end{figure}
+
+
+Below, we include a snippet from the \texttt{stereotaxy.smk} rule file, which reuses several functions and components described throughout this chapter.
+
+
+\begin{minted}[fontsize=\small, bgcolor=bg, linenos, breaklines]{python}
+stereotaxy_target = config["stereotaxy"]
+
+rule afidspred:
+    input:
+        afidfcsv=bids(
+            root=root,
+            datatype="afids-cnn",
+            desc="afidscnn",
+            suffix="afids.fcsv",
+            **inputs[config["modality"]].wildcards
+        ),
+    output:
+        fcsv_native=bids(
+            root=root,
+            datatype="stereotaxy",
+            desc=stereotaxy_target,
+            suffix="native.fcsv",
+            **inputs[config["modality"]].wildcards
+        ),
+        fcsv_mcp=bids(
+            root=root,
+            datatype="stereotaxy",
+            desc=stereotaxy_target,
+            suffix="mcp.fcsv",
+            **inputs[config["modality"]].wildcards
+        ),
+        ACPC_txt=bids(
+            root=work,
+            datatype="ACPCtransforms",
+            desc="transform",
+            suffix="ACPC.txt",
+            **inputs[config["modality"]].wildcards
+        ),
+    params:
+        model=str(Path(workflow.basedir).parent / config[stereotaxy_target]),
+        midpoint="PMJ",
+        target_fcsv=str(
+            Path(workflow.basedir).parent / config["template_fcsv"]
+        ),
+    conda:
+        "../envs/skimage.yaml"
+    script:
+        "../scripts/stereotaxy.py"
+\end{minted}
