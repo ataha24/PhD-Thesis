@@ -399,7 +399,7 @@ Chair of the Thesis Examination Board
 \begin{preliminary}
 
 %% This generates the title page from the information given above.
-\maketitle
+% \maketitle
 %\addcontentsline{toc}{chapter}{Certificate of Examination}
 %\makecert
 %\addcontentsline{toc}{chapter}{Acknowlegements}
@@ -411,7 +411,7 @@ Chair of the Thesis Examination Board
 \input{abstract}
 
 \vfill
-\noindent\textbf{Keywords:} stereotactic neurosurgery, deep brain stimulation, brain coordinates, machine learning, magnetic resonance imaging, image registration, surgical targeting, quality control, open-source.
+\noindent\textbf{Keywords:} stereotactic neurosurgery, deep brain stimulation, brain coordinates, machine learning, surgical targeting, brain mapping, open science.
 \newpage
 
 
@@ -491,85 +491,115 @@ Chair of the Thesis Examination Board
 \addcontentsline{toc}{chapter}{List of Abbreviations, Symbols, and Nomenclature}
 \Large \textbf{List of Abbreviations, Symbols, and Nomenclature} \normalsize
 
-
-\begin{longtable}{lcl}
-\endfirsthead
-
-\multicolumn{3}{l}{\textbf{List of Abbreviations and Nomenclature (continued)}} \\
-\endhead
-
-\endfoot
-
-\multicolumn{3}{l}{\textbf{General Terminology}} \\
-3D & & Three-dimensional \\
-7T & & Seven Tesla \\
-AC & & Anterior commissure \\
-PC & & Posterior commissure \\
-AC-PC & & Anterior–posterior commissure \\
-BG & & Basal ganglia \\
-CNR & & Contrast-to-noise ratio \\
-CSF & & Cerebrospinal fluid \\
-DBS & & Deep brain stimulation \\
-GM & & Gray matter \\
-IC & & Internal capsule \\
-PD & & Parkinson’s disease \\
-AD & & Alzheimer's disease \\
-RN & & Red nucleus \\
-ROI & & Region of interest \\
-SNR & & Signal-to-noise ratio \\
-STN & & Subthalamic nucleus \\
-VTA & & Volume of tissue activated \\
-WM & & White matter \\
-ZI & & Zona incerta \\
+\begin{longtable}{lll}
+\multicolumn{3}{l}{\textbf{General Neuroscience and Anatomy}} \\
+3D & & Three-Dimensional \\
+AC & & Anterior Commissure \\
+PC & & Posterior Commissure \\
+AC-PC line & & Anterior Commissure–Posterior Commissure Line \\
+BG & & Basal Ganglia \\
+CM & & Centromedian Nucleus \\
+GPi & & Globus Pallidus Internus \\
+GPe & & Globus Pallidus Externus \\
+RN & & Red Nucleus \\
+STN & & Subthalamic Nucleus \\
+VIM & & Ventral Intermediate Nucleus \\
+VLp & & Ventrolateral Posterior Nucleus \\
+ZI & & Zona Incerta \\
+CSF & & Cerebrospinal Fluid \\
+GM & & Gray Matter \\
+WM & & White Matter \\
+IC & & Internal Capsule \\
+ROI & & Region of Interest \\
+PD & & Parkinson’s Disease \\
+AD & & Alzheimer's Disease \\
+DBS & & Deep Brain Stimulation \\
+VTA & & Volume of Tissue Activated \\
+MNI & & Montreal Neurological Institute (template space) \\
+Talairach & & Talairach Coordinate System \\
 DISTAL & & DBS Intrinsic Template AtLas \\
-\\
+
+\addlinespace[1ex]
 \multicolumn{3}{l}{\textbf{Medical Imaging Terminology}} \\
-BIDS & & Brain Imaging Data Structure \\
-MRI & & Magnetic resonance imaging \\
-CT & & Computed tomography \\
+MRI & & Magnetic Resonance Imaging \\
+T & & Tesla (unit of magnetic field strength) \\
+CT & & Computed Tomography \\
 DICOM & & Digital Imaging and Communications in Medicine \\
-DTI & & Diffusion tensor imaging \\
-DWI & & Diffusion-weighted imaging \\
-FGATIR & & Fast Gray Matter Acquisition T1 Inversion Recovery \\
-FLAIR & & Fluid-attenuated inversion recovery \\
-MP2RAGE & & Magnetization-prepared 2 rapid gradient echoes \\
-MPRAGE & & Magnetization-prepared rapid acquisition gradient echo \\
 NIfTI & & Neuroimaging Informatics Technology Initiative \\
-NMR & & Nuclear magnetic resonance \\
-QSM & & Quantitative susceptibility mapping \\
-SPACE & & Sampling Perfection with Application-optimized Contrasts using flip angle Evolutions \\
-SWI & & Susceptibility-weighted imaging \\
-T1w & & T1-weighted \\
-T2w & & T2-weighted \\
-TE & & Echo time \\
-TI & & Inversion time \\
-TR & & Repetition time \\
-UHF & & Ultra-high field \\
-\\
-\multicolumn{3}{l}{\textbf{Machine Learning and Image Processing Terminology}} \\
-GPU & & Graphics processing units \\
-ANN & & Artificial neural network \\
-CNN & & Convolutional neural network \\
-DL & & Deep learning \\
-MSE & & Mean squared error \\
-ED & & Euclidean distance \\
-ML & & Machine learning \\
-nnU-Net & & No-new-Unet (self-configuring U-Net) \\
-ReLU & & Rectified linear unit \\
-XGBoost & & Extreme Gradient Boosting \\
-ANTs & & Advanced Normalization Tools \\
+NMR & & Nuclear Magnetic Resonance \\
+QSM & & Quantitative Susceptibility Mapping \\
+DWI & & Diffusion-Weighted Imaging \\
+DTI & & Diffusion Tensor Imaging \\
+FGATIR & & Fast Gray Matter Acquisition T1 Inversion Recovery \\
+FLAIR & & Fluid-Attenuated Inversion Recovery \\
+MP2RAGE & & Magnetization-Prepared 2 Rapid Acquisition Gradient Echo \\
+MPRAGE & & Magnetization-Prepared Rapid Acquisition Gradient Echo \\
+SPACE & & Sampling Perfection with Application Contrasts via Flip Angle Evolution \\
+SWI & & Susceptibility-Weighted Imaging \\
+T1w & & T1-Weighted \\
+T2w & & T2-Weighted \\
+TE & & Echo Time \\
+TI & & Inversion Time \\
+TR & & Repetition Time \\
+CNR & & Contrast-to-Noise Ratio \\
+SNR & & Signal-to-Noise Ratio \\
+UHF & & Ultra-High Field \\
+BIDS & & Brain Imaging Data Structure \\
+BIDS-Derivatives & & Brain Imaging Data Structure Derivatives \\
+QC & & Quality Control \\
+
+\addlinespace[1ex]
+\multicolumn{3}{l}{\textbf{Neuroimaging Software and Tools}} \\
+SPM & & Statistical Parametric Mapping \\
+FSL & & FMRIB Software Library \\
 FLIRT & & FMRIB's Linear Image Registration Tool \\
 FNIRT & & FMRIB's Nonlinear Image Registration Tool \\
-MI & & Mutual information \\
-NCC & & Normalized cross-correlation \\
-SSD & & Sum of squared differences \\
-SyN & & Symmetric normalization \\
-\\
+ANTs & & Advanced Normalization Tools \\
+ANTsPy & & Advanced Normalization Tools Python Interface \\
+SyN & & Symmetric Normalization \\
+FreeSurfer & & FreeSurfer Neuroimaging Suite \\
+Lead-DBS & & Lead-Deep Brain Stimulation Toolbox \\
+ITK & & Insight Segmentation and Registration Toolkit \\
+
+\addlinespace[1ex]
+\multicolumn{3}{l}{\textbf{Machine Learning and Image Processing}} \\
+ML & & Machine Learning \\
+DL & & Deep Learning \\
+CNN & & Convolutional Neural Network \\
+ANN & & Artificial Neural Network \\
+GPU & & Graphics Processing Unit \\
+XGBoost & & Extreme Gradient Boosting \\
+ReLU & & Rectified Linear Unit \\
+nnU-Net & & No-New-Net (Self-Configuring U-Net) \\
+MI & & Mutual Information \\
+NCC & & Normalized Cross-Correlation \\
+SSD & & Sum of Squared Differences \\
+PCA & & Principal Component Analysis \\
+t-SNE & & t-Distributed Stochastic Neighbor Embedding \\
+UMAP & & Uniform Manifold Approximation and Projection \\
+LOOCV & & Leave-One-Out Cross-Validation \\
+CV & & Cross-Validation \\
+MSE & & Mean Squared Error \\
+RMSE & & Root Mean Squared Error \\
+MAE & & Mean Absolute Error \\
+ED & & Euclidean Distance (in mm) \\
+
+\addlinespace[1ex]
+\multicolumn{3}{l}{\textbf{Open Science and Reproducibility}} \\
+GitHub & & GitHub (Collaborative Code Hosting Platform) \\
+Zenodo & & Zenodo (Open Access Research Repository) \\
+DOI & & Digital Object Identifier \\
+JSON & & JavaScript Object Notation \\
+YAML & & Yet Another Markup Language \\
+
+\addlinespace[1ex]
 \multicolumn{3}{l}{\textbf{Terms Introduced by this Thesis}} \\
-AFID & & Anatomical fiducial \\
-AFLE & & Anatomical fiducial localization error \\
-AFRE & & Anatomical fiducial registration error \\
+AFID & & Anatomical Fiducial \\
+AFLE & & Anatomical Fiducial Localization Error \\
+AFRE & & Anatomical Fiducial Registration Error \\
+AutoAFIDs & & Automated AFID Detection Model \\
 \end{longtable}
+
 
 
 \newpage
