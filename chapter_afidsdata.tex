@@ -180,7 +180,8 @@ UHF = Ultra-high field; PD = Parkinson’s Disease; AD = Alzheimer’s Disease.
 
 \textbf{SNSX Dataset.} This dataset includes 32 healthy participants (age: 46.2 ± 13.5 years; range: 20–70; 12 female) and 30 Parkinson's disease patients (age: 53.4 ± 13.5 years; range: 30-75; 13 female) scanned at Western University's Centre for Functional and Metabolic Mapping using a 7T Siemens Magnetom head-only scanner with an 8-channel parallel transmit / 32-receive channel coil. The detailed imaging protocol and pre-processing steps were documented in a previous study \cite{Lau2020-dh}. Ethics approval was obtained from Western HSREB (REB\# R-17–156), with written participant consent. The AFID protocol was performed three times (5,952 fiducials). Nine raters (3 experts, 6 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by one expert and two novice raters.
 
-\textbf{3T7T Dataset.} This open dataset includes paired imaging from 10 healthy adults (age: 32.0 ± 11 years; range: 25–41; 3 females). Participants underwent (1) T1w and (2) T2w MRI scans at 3T and 7T resolutions. Detailed imaging protocols are detailed in a previous data descriptor \cite{Chen2023-cn}. The AFID protocol was performed three times on both 3T and 7T imaging (1,920 fiducials). Six raters (3 experts, 3 novices) performed annotations using 3DSlicer v4.8.1 with each scan annotated by two experts and one novice raters.
+\textbf{3T7T Dataset.} This open-access dataset includes paired imaging from 10 healthy adults (mean age: 32.0 ± 11 years; range: 25–41; 3 female). Each participant underwent T2-weighted (T2w) MRI at 3T and 7T field strengths. Detailed acquisition protocols are described in a prior data descriptor \cite{Chen2023-cn}. The AFID protocol was applied three times to each T2w scan (1,920 fiducials in total), with annotations performed in 3D Slicer (v4.8.1) by six human raters—three experts and three novices. Each scan was independently annotated by two expert raters and one novice rater. To date, no prior AFID validation studies have been conducted on T2w MRI. For completeness, we include a feasibility analysis of T2w AFID placement in Supplementary Section~\ref{app:AFIDs_T2w}.
+
 
 \textbf{MNI2009bAsym, Agile12v2016, and MNIColin27 Templates.} Each template was annotated four times by eight raters (same cohort as AFIDs-OASIS30), using 3DSlicer v4.8.1. A total of 32 annotations (1,024 fiducials) were performed per template:
 
@@ -267,7 +268,7 @@ AFIDs-OASIS30        & Mean: 2,880; Inter-rater: 2,880  & 0.94 ± 0.73 & 1.58 ±
 AFIDs-ADNI10         & Mean: 640; Inter-rater: 320  & 0.78 ± 0.90 & 1.55 ± 1.78 \\
 LHSCPD               & Mean: 8,000; Inter-rater: 16,000 & 1.57 ± 1.16 & 2.01 ± 1.49 \\
 SNSX                 & Mean: 5,952; Inter-rater: 5,952  & 0.96 ± 0.33 & 1.64 ± 1.37 \\
-3T7T                 & Mean: 1,920; Inter-rater: 1,920  & 1.04 ± 0.83 &  1.74 ± 1.39  \\
+3T7T                 & Mean: 1,920; Inter-rater: 1,920  & 1.04 ± 0.83 &  1.54 ± 1.39  \\
 \midrule
 \textbf{Total or Average} & \textbf{Mean: }23,872; \textbf{Inter-rater:} 32,160 & \textbf{1.14 ± 0.36} & \textbf{1.73 ± 0.34} \\
 \bottomrule

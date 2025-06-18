@@ -69,5 +69,60 @@ STN & 3T7T & Rater A & 84 & 84 & 84 \\
 \label{tab:rater_demographic_data}
 \end{table}
 
+\newpage
+
+\section{The Anatomical Fiducial Protocol on T2w MRI}\label{app:AFIDs_T2w}
+
+To date, no formal validation study has evaluated the application of the AFIDs protocol on T2w MRI. In this supplementary section, we demonstrate that localization of all 32 AFIDs is feasible on this imaging modality and that localization errors are comparable to prior validation studies \cite{Lau2019-eh,Abbass2022-lf}.
+
+\subsection{Rater Characteristics and Annotation Procedure}
+
+We recruited six human raters who completed the AFIDs protocol on T2w MRI scans from the 3T7T dataset described in Chapter \ref{chap:afidsdata}. An adapted protocol was curated for this purpose and is made available at: \url{https://ataha24.github.io/afids-protocol/afids_protocol/human_protocol_T2w.html}.
+
+Three raters (rater1–rater3) were classified as experts, having prior experience with neuroanatomy, MRI, and the AFIDs protocol in previously published manuscripts. The remaining three (rater4–rater6) were novices with less than four years of experience and no prior exposure to AFID placement. All raters completed a demographic survey documenting their experience with neuroanatomy, MRI, and 3D Slicer which is provided here in Table~\ref{tab:rater_demographics_T2w} for completeness.
+
+\begin{table}[ht]
+\centering
+\caption{Rater demographics including prior AFID placement experience and years of expertise in relevant domains for T2w AFID protocol validation.}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Rater ID} & \textbf{Placed AFIDs Before?} & \textbf{Expert/Novice} & \textbf{3DSlicer} & \textbf{Neuroanatomy} & \textbf{MRI} \\
+\midrule
+1 & Y & Expert & 6 & 6 & 6 \\
+2 & Y & Expert & 10 & 10 & 10 \\
+3 & Y & Expert & 2 & 4 & 4 \\
+4 & N & Novice & 2 & 1 & 1 \\
+5 & N & Novice & 1 & 3 & 4 \\
+6 & N & Novice & 0 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\label{tab:rater_demographics_T2w}
+\end{table}
+
+\subsection{AFID Localization}
+
+Raters placed the AFIDs protocol on 20 T2w MRI scans (10 at 3T and 10 at 7T) from 10 healthy participants. Localization accuracy was evaluated using the anatomical fiducial localization error (AFLE), defined as the Euclidean distance between a given rater’s placement and the mean coordinate across all raters for that fiducial. Across all scans and raters, the overall mean AFLE was $1.04 \pm 0.54$ mm. 
+
+\subsection{AFLE Across Rater Group}
+Expert raters localized AFIDs with a mean error of $1.01 \pm 0.72$ mm. Novice raters, following online training and protocol familiarization, achieved a mean error of $1.14 \pm 0.73$ mm. There were no statistically significant differences in AFLE between expert and novice raters via Wilcoxon signed-rank test.
+
+
+\subsection{AFLE Across Scanner Group}
+When stratified by scanner resolution, the median AFLE on 3T scans was 1.01 mm (IQR: 0.69 mm; mean: $1.08 \pm 0.51$ mm), while the median AFLE on 7T scans was 0.92 mm (IQR: 0.56 mm; mean: $0.99 \pm 0.56$ mm).
+Wilcoxon signed-rank tests (significance threshold $p < 0.05$) revealed that AFLE was significantly lower on 7T scans for six fiducials:
+\begin{itemize}[noitemsep]
+    \item AFID 1 – anterior commissure
+    \item AFID 2 – posterior commissure
+    \item AFID 12 – right mamillary body
+    \item AFID 13 – left mamillary body
+    \item AFID 18 – left frontal horn
+    \item AFID 31 – right occipital horn
+\end{itemize}
+
+Although 7T scans yielded significantly lower AFLE for a subset of AFIDs—likely reflecting enhanced anatomical contrast at ultra-high field strength—both 3T and 7T AFLE values fall well within the millimetric error range reported in prior validation studies. This suggests that while 7T imaging may offer marginal gains in anatomical resolution for specific landmarks, 3T scans remain sufficient to support reliable AFID localization. These findings reinforce the robustness of the AFIDs framework across field strengths and its generalizability to standard clinical MRI systems with T2w contrast.
+
+\subsection{Conclusion}
+This supplementary analysis confirms that AFID placement on T2w MRI is feasible and achieves millimetric accuracy across both clinical-grade (3T) and ultra-high field (7T) scans. Placement accuracy was comparable to previously published T1w-based studies \cite{Lau2019-eh,Abbass2022-lf} --- which ranged between 0-2 mm --- and novice raters were able to reach similar accuracy levels as expert annotators. These findings support the generalizability of the AFIDs protocol to T2w imaging for use in research and clinical neuroimaging workflows.
+
 
 \newpage
