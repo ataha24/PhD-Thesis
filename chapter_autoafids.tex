@@ -64,7 +64,7 @@ For model development, all curated datasets were divided into training ($n = \te
 
 \subsection{Preprocessing and Data Preparation}
 
-We adopted standardized preprocessing profiles inspired by the nnU-Net framework \cite{Isensee2021-ev}, with modifications tailored for anatomical landmark detection. We built our workflow with Snakemake \cite{Koster2012-ok} in a BIDS-compliant fashion (i.e., SnakeBIDS; \cite{Van-Dyken2025-cn}). Input data were T1-weighted (T1w) structural MRIs, optionally converted from alternate contrasts (e.g., T2w, FLAIR, CT) using SynthSR \cite{Iglesias2023-co} when specified. 
+We adopted standardized preprocessing profiles inspired by the nnU-Net framework \cite{Isensee2021-ev}, with modifications tailored for anatomical landmark detection. We built our workflow with Snakemake \cite{Koster2012-ok} in a BIDS-compliant fashion (i.e., SnakeBIDS; \cite{Van-Dyken2025-cn}). Input data were T1-weighted (T1w) structural MRIs, optionally converted from alternate contrasts (e.g., T2w, FLAIR, and CT) using SynthSR \cite{Iglesias2023-co} when specified. 
 
 \begin{figure}[hbt!]
     \centering
