@@ -17,7 +17,9 @@ Inspired by classic stereotactic methods, our group created, curated, and valida
 
 The AFID protocol provides a metric that is independent of the registration itself while offering sensitivity to registration errors at the scale of millimeters (mm). This margin is crucial in neuroimaging applications (including morphometric analysis and surgical neuromodulation), where a few millimeters may represent the difference between optimal and suboptimal therapy.
 
-The aim of this data descriptor is to provide the community with curated AFID placements and their associated MRI images. We release annotations on five datasets (\(N\)=202; 6,464 fiducials) including healthy subjects and patients with neurological disorders, and 14 commonly used MRI templates (4,288 fiducials), totalling 300 human rater hours of manual annotations. Descriptions of the datasets and templates are provided in subsequent sections. We highlight current and prospective applications of our released data in Figure \ref{fig:ch2_Figure_1}.
+
+ 
+The aim of this data descriptor is to provide the community with curated AFID placements and their associated MRI images. We hypothesized that: (1) trained human raters can reliably identify AFIDs with submillimetric to low-millimetric accuracy (within 1–2 mm) across diverse subjects and templates using a standardized protocol; and (2) anatomical fiducial registration error exhibits systematic, dataset-dependent biases that reflect underlying anatomical and imaging variability. To test this and facilitate wider community adoption, we release annotations on five datasets (\(N\)=202; 6,464 fiducials) including healthy subjects and patients with neurological disorders, and 14 commonly used MRI templates (4,288 fiducials), totalling 300 human rater hours of manual annotations. Descriptions of the datasets and templates are provided in subsequent sections. We highlight current and prospective applications of our released data in Figure \ref{fig:ch2_Figure_1}.
 
 \begin{figure}[hbt!]
     \centering
@@ -110,7 +112,7 @@ Fiducial localization error (FLE) is a term described by Fitzpatrick and colleag
 \label{fig:ch2_Figure_AFLE}
 \end{figure}
 
-We also adopt the term \textbf{fiducial registration error (FRE)} in the context of the AFID protocol, and refer to it as the \textbf{anatomical fiducial registration error (AFRE)}. It is important to note that AFRE in our context diverges from the original usage by Fitzpatrick and colleagues\cite{Fitzpatrick1998-hp}, which was restricted to describing registration error at fiducials used to drive image registration (i.e., during landmark-based registration). Computed in millimeters, AFRE is defined as the error arising from the registration protocol performed between two images (often, but not limited to, subject and template). AFRE is the distance, after co-registration, between each of the 32 AFIDs placed on a moving image and their counterparts placed on the fixed image (i.e., homologous points). Thus, the AFRE provides a registration error metric that is independent of the registration protocol. The average AFRE of all fiducials is termed the \emph{global AFRE}. We  establish nomenclature to differentiate use cases for AFRE:
+We also adopt the term \textbf{fiducial registration error (FRE)} in the context of the AFID protocol, and refer to it as the \textbf{anatomical fiducial registration error (AFRE)}. It is important to note that AFRE in our context diverges from the original usage by Fitzpatrick and colleagues \cite{Fitzpatrick1998-hp}, which was restricted to describing registration error at fiducials used to drive image registration (i.e., during landmark-based registration). Computed in millimeters, AFRE is defined as the error arising from the registration protocol performed between two images (often, but not limited to, subject and template). AFRE is the distance, after co-registration, between each of the 32 AFIDs placed on a moving image and their counterparts placed on the fixed image (i.e., homologous points). Thus, the AFRE provides a registration error metric that is independent of the registration protocol. The average AFRE of all fiducials is termed the \emph{global AFRE}. We  establish nomenclature to differentiate use cases for AFRE:
 \begin{itemize}
     \item \textbf{Real-world AFRE:} If an individual rater placement is chosen for subsequent analysis, the resulting AFRE is referred to as the real-world AFRE, as it reflects what would occur in a clinical setting where one rater applies the AFID protocol.
     \item \textbf{Consensus AFRE:} If a ground truth AFID placement is used, the resulting error is termed the consensus AFRE, as it represents the average placement among a group of raters prior to the image registration step.
@@ -192,7 +194,7 @@ UHF = Ultra-high field; PD = Parkinson’s Disease; AD = Alzheimer’s Disease.
 \end{itemize}
 
 
-\textbf{BigBrainSym, MNI2009bSym, and PD-25 Templates.} Each template was annotated twice by two expert raters using 3DSlicer v4.8.1. for a total of 4 annotations (128 fiducials) per template. 
+\textbf{BigBrainSym, MNI2009bSym, and PD-25 Templates.} Each template was annotated twice by two expert raters using 3DSlicer v4.8.1 for a total of 4 annotations (128 fiducials) per template. 
 
 \begin{itemize}
     \item \textbf{BigBrainSym:} A 3D histological model created from a 65-year-old male brain sectioned at 20~$\mu$m \cite{Amunts2013-vu}. The template represents the histological BigBrain warped to MNI2009bSym space.
