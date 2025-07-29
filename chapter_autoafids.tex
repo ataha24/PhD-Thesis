@@ -136,29 +136,29 @@ Model performance was evaluated on a held-out test set (n = 21) by computing the
 
 \begin{figure}[hbt!]
     \centering
-    \includegraphics[width=1\linewidth]{figs/Screenshot 2025-07-27 at 7.19.06 PM.png}
+    \includegraphics[width=1\linewidth]{figs/reds_final.png}
     \caption{Overview of localization error using \texttt{AutoAFIDs}. (a) Heatmap showing Euclidean distance errors (in mm) for each predicted anatomical landmark across 21 test subjects. Each column corresponds to one of the 32 AFIDs, and each row to a subject. (b) Spatial distribution of landmark-specific median prediction errors visualized on a glass brain. Each point represents the anatomical location of an AFID in stereotactic space, with marker size and color encoding the median error across subjects. Higher spatial variability in model accuracy was observed in lateral and ventricular landmarks.}
     \label{fig:ch3_Figure_autoscore}
 \end{figure}
 
 Per-landmark performance showed modest variability, reflecting differences in anatomical complexity, tissue contrast, and inter-subject variability. Ten landmarks exhibited median errors in the sub-millimetric range (0.4–0.9 mm), while more challenging regions, such as those adjacent to ventricular structures, demonstrated higher variability (2-2.4 mm). The maximum observed error across all landmarks was 5.28 mm. A complete summary of per-landmark accuracy is provided in Table~\ref{tab:autoafids_accuracy}. We also performed a head-to-head comparison between the localization accuracy by AutoAFIDs to that of inter-rater human error.
 
-The time taken to complete the workflow end-to-end was approximately 4 minutes per subject using an Intel(R) Xeon(R) Gold 6142 CPU @ 2.60\,GHz. This includes preprocessing (patch extraction), inference for all 32 landmarks using trained 3D U-Net models, thresholding, centroid extraction, and coordinate transformation back to image space.
+The time taken to complete the workflow end-to-end was approximately 4 minutes per subject using an Intel(R) Xeon(R) Gold 6142 CPU @ 2.60GHz without GPU acceleration. This includes preprocessing (patch extraction), inference for all 32 landmarks using trained 3D U-Net models, thresholding, centroid extraction.
 
 
 \subsection{Registration Evaluation Using \texttt{AutoAFIDs}}
 To assess the sensitivity of \texttt{AutoAFIDs} for evaluating image registration, we compared its predicted landmark coordinates to those derived from \texttt{Lead-DBS} (v3.0; \cite{Neudorfer2023-wd}), a widely used software suite for DBS research that incorporates multi-stage nonlinear registration to align patient MRI data to stereotactic space. In this analysis, we leverage warps generated from \texttt{Lead-DBS} to propagate ground truth AFID annotations on the MNI152NLIN2009b template back to native space.
 
 ED errors were computed across all AFIDs and test subjects, resulting in 672 paired error measurements per method. On average, \texttt{AutoAFIDs} achieved significantly lower localization error (mean: 1.40\,±\,0.85\,mm) compared to \texttt{Lead-DBS} (2.60\,±\,3.19\,mm), with a Wilcoxon signed-rank test confirming statistical significance (\(p < 0.001\)). As shown in Figure~\ref{fig:ch3_Figure_cnnvslead1}a, the error distribution for \texttt{AutoAFIDs} is left-shifted and more tightly clustered, while \texttt{Lead-DBS} displays a heavier tail. Cumulative error curves reinforce this difference, with \texttt{AutoAFIDs} reaching 80\% of data under 2\,mm, compared to only 55\% for \texttt{Lead-DBS}. Figure~\ref{fig:ch3_Figure_cnnvslead1}b shows a scatter plot of the data (i.e., 672 AFIDs) thresholded at 10 mm for visibility. A majority of AFIDs lie above the identity line, indicating superior performance by \texttt{AutoAFIDs}.
-
 \begin{figure}[hbt!]
     \centering
     \includegraphics[width=1\linewidth]{figs/ch3_Figure_cnnvslead1.png}
     \caption{Comparison between \texttt{AutoAFIDs} and \texttt{Lead-DBS} at landmark localization in native space. (a) Distribution of all Euclidean distance (ED) for \texttt{AutoAFIDs} (red) and \texttt{Lead-DBS} (blue), shown as overlapping histograms and cumulative frequency curves. Vertical dashed lines indicate means. (b) Scatter plot comparing ED errors for all AFID across all subjects. Each point represents one AFID on a single subject's MRI volume, with the \texttt{AutoAFIDs} error on the x-axis and the corresponding \texttt{Lead-DBS} error on the y-axis. Most points lie above the identity, indicating improved localization accuracy with \texttt{AutoAFIDs} relative to \texttt{Lead-DBS}. The data was thresholded at 10 mm for visibility.}
     \label{fig:ch3_Figure_cnnvslead1}
 \end{figure}
-
+\newpage
 To better understand performance differences, we examined both subject-level and AFID-level error patterns using the median ED as a robust measure less sensitive to outliers. Figure~\ref{fig:ch3_Figure_cnnvslead2}a shows paired median EDs for each subject, with the majority demonstrating improved localization accuracy using \texttt{AutoAFIDs}. At the AFID level, Figure~\ref{fig:ch3_Figure_cnnvslead2}b compares median errors across methods, revealing that \texttt{AutoAFIDs} statistically outperformed \texttt{Lead-DBS} on 14 out of 32 AFIDs (\(p < 0.05\)) via a Wilcoxon signed-rank test. These improvements suggest consistent localization advantages, particularly at AFIDs where registration-based methods are more prone to failure.
+
 
 \begin{figure}[hbt!]
     \centering
@@ -267,7 +267,7 @@ The 3D U-Net architecture underlying \texttt{AutoAFIDs} enabled accurate localiz
 
 To enhance generalizability beyond T1-weighted inputs, we employed SynthSR \cite{Iglesias2023-co}, a widely used domain-adaptive tool that synthesizes 1~mm isotropic MP2RAGE-like volumes from various input modalities (e.g., T2w, FLAIR, CT). While this enables broader applicability of \texttt{AutoAFIDs} in various contexts where high-resolution T1w images may be unavailable, SynthSR has not been explicitly validated for millimetric accuracy in stereotactic applications. As such, we include warnings in the software documentation advising caution when applying the model to non-T1w modalities and encourage users to visually inspect results. Rigorous validation of SynthSR-based inference remains an important future direction, particularly as synthetic image pipelines gain traction in neurosurgical planning.
 
-AutoAFIDs was trained exclusively on adult brain images, leveraging AFIDs defined on standardized templates (e.g., MNI), which are based on adult populations. As a result, its performance on younger subjects may be compromised due to developmental differences in brain size, morphology, and landmark topology. To ensure anatomical consistency, minimize model extrapolation, and preserve accuracy across the lifespan dataset, we restricted our analysis to individuals aged 18 years and older.
+AutoAFIDs was trained exclusively on adult brain images, leveraging AFIDs defined on standardized templates (e.g., MNI), which are based on adult populations. As a result, its performance on pediatric populations may be compromised due to developmental differences in brain size, morphology, and landmark topology. To ensure anatomical consistency, minimize model extrapolation, and preserve accuracy across the lifespan dataset, we restricted our analysis to individuals aged 18 years and older.
 
 Finally, although we presented initial analyses of brain morphometry and disease-related variability using \texttt{AutoAFIDs}, these were intended as proof-of-concept demonstrations. The curated dataset enables a much deeper exploration of anatomical differences across lifespan and disease states, including longitudinal and progression-related changes. We view this work as the first step in that direction, and future studies will leverage \texttt{AutoAFIDs} to more systematically investigate these questions.
 
